@@ -16,14 +16,14 @@
   </licenses>
   <scm>
     <url>https://github.com/thomasleplus/SubChannel</url>
-    <connection>scm:git:git://github.com/thomasleplus/SubVrypto.git</connection>
-    <developerConnection>scm:git:git@github.com:thomasleplus/SubChannel.git</developerConnection>
+    <connection>scm:git:https://github.com/thomasleplus/SubChannel.git</connection>
+    <developerConnection>scm:git:https://github.com/thomasleplus/SubChannel.git</developerConnection>
   </scm>
   <developers>
     <developer>
-      <email>thomas@leplus.org</email>
+      <email>thomas.leplus@gmail.com</email>
       <name>Thomas Leplus</name>
-      <url>https://github.com/thomasleplus</url>
+      <url>http://www.leplus.org</url>
       <id>thomasleplus</id>
     </developer>
   </developers>
