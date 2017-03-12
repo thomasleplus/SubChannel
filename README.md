@@ -6,8 +6,8 @@ The main idea of the project is to produce software capable of producing perfect
 
 For more information on this project, as well as the original paper in PDF, please see (in French):
 
-http://www.leplus.org/projects/channel/
+https://www.leplus.org/projects/channel/
 
 [Travis CI](https://travis-ci.org/thomasleplus/SubChannel)
 
-<img src="https://api.travis-ci.org/thomasleplus/SubChannel.png"></a>
+<a href="https://travis-ci.org/thomasleplus/SubChannel"><img src="https://api.travis-ci.org/thomasleplus/SubChannel.png"></a>
