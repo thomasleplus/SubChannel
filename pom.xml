@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   <groupId>org.leplus</groupId>
   <artifactId>subchannel</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>subchannel</name>
+  <name>SubChannel</name>
   <packaging>jar</packaging>
   <description>A study on subliminal channels in DSA algorithm.</description>
   <url>https://github.com/thomasleplus/SubChannel</url>
@@ -34,14 +34,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   <scm>
     <url>https://github.com/thomasleplus/SubChannel</url>
     <connection>scm:git:https://github.com/thomasleplus/SubChannel.git</connection>
-    <developerConnection>scm:git:https://github.com/thomasleplus/SubChannel.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:thomasleplus/SubChannel.git</developerConnection>
   </scm>
+  <organization>
+    <name>Leplus.org</name>
+    <url>https://www.leplus.org</url>
+  </organization>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/thomasleplus/SubChannel/issues</url>
+  </issueManagement>
   <developers>
     <developer>
-      <email>thomas.leplus@gmail.com</email>
+      <email>thomas@leplus.org</email>
       <name>Thomas Leplus</name>
       <url>https://www.leplus.org</url>
       <id>thomasleplus</id>
+      <roles>
+        <role>Project Lead</role>
+      </roles>
     </developer>
   </developers>
   <properties>
