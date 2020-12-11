@@ -18,122 +18,119 @@
 
 package org.leplus.libcrypto;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
- * Machine à Signatures.
+ * Machine ï¿½ Signatures.
  *
  * @version $Revision: 1.3 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class SignatureEngine {
-	
+
 	/**
 	 * La fonction de hachage.
 	 */
 	protected DigestEngine digest;
-	
+
 	/**
-	 * Lit les octets sur le flot jusqu'à sa fin.
+	 * Gï¿½nï¿½re la signature des octets lus.
 	 *
-	 * @param input le flot d'entrée.
-	 * @return le nombre d'octets lus.
-	 * @throws IOException si une erreure se produit lors de
-	 *         la lecture du flot.
+	 * @param digest le hachage du message.
+	 * @param key    la clï¿½ privï¿½e.
+	 * @return la signature.
 	 */
-	public final int update(InputStream input)
-		throws IOException {
-		return digest.update(input);
-	}
-	
+	protected abstract Signature doSign(Digest digest, PrivateKey key);
+
 	/**
-	 * Lit au plus le nombre donné d'octets sur le flot.
+	 * Vï¿½rifie la signature des octets lus.
 	 *
-	 * @param input le flot d'entrée.
-	 * @param length le nombre d'octets à lire.
-	 * @return le nombre d'octets lus.
-	 * @throws IOException si une erreure se produit lors de
-	 *         la lecture du flot.
+	 * @param digest    le hachage du message.
+	 * @param key       la clï¿½ publique.
+	 * @param signature the signature.
+	 * @return true si la signature est valide, false sinon.
 	 */
-	public final int update(InputStream input, int length)
-		throws IOException {
-		return digest.update(input, length);
+	protected abstract boolean doVerify(Digest digest, PublicKey key, Signature signature);
+
+	/**
+	 * Remet la machine dans son ï¿½tat initial (garde en mï¿½moire le mode gï¿½nï¿½ration
+	 * ou vï¿½rification et la clï¿½ correspondante).
+	 */
+	public final void reset() {
+		digest.reset();
 	}
-	
+
+	/**
+	 * Gï¿½nï¿½re la signature des octets lus et remet la machine dans son ï¿½tat initial
+	 * (garde en mï¿½moire le mode gï¿½nï¿½ration ou vï¿½rification et la clï¿½
+	 * correspondante).
+	 *
+	 * @param key la clï¿½ privï¿½e.
+	 * @return la signature.
+	 */
+	public final Signature sign(final PrivateKey key) {
+		return doSign(digest.digest(), key);
+	}
+
 	/**
 	 * Lit tous les octets du tableau.
 	 *
 	 * @param bytes le tableau d'octets.
 	 * @return le nombre d'octets lus.
 	 */
-	public final int update(byte[] bytes) {
+	public final int update(final byte[] bytes) {
 		return digest.update(bytes, 0, bytes.length);
 	}
-	
+
 	/**
-	 * Lit au plus le nombre donné d'octets du tableau en commençant à
-	 * l'indice donné.
+	 * Lit au plus le nombre donnï¿½ d'octets du tableau en commenï¿½ant ï¿½ l'indice
+	 * donnï¿½.
 	 *
-	 * @param bytes le tableau d'octets.
-	 * @param offset l'indice de départ.
-	 * @param length le nombre d'octets à lire.
+	 * @param bytes  le tableau d'octets.
+	 * @param offset l'indice de dï¿½part.
+	 * @param length le nombre d'octets ï¿½ lire.
 	 * @return le nombre d'octets lus.
 	 */
-	public final int update(byte[] bytes, int offset, int length) {
+	public final int update(final byte[] bytes, final int offset, final int length) {
 		return digest.update(bytes, offset, length);
 	}
-	
+
 	/**
-	 * Génère la signature des octets lus et remet la machine dans son
-	 * état initial (garde en mémoire le mode génération ou
-	 * vérification et la clé correspondante).
+	 * Lit les octets sur le flot jusqu'ï¿½ sa fin.
 	 *
-	 * @param key la clé privée.
-	 * @return la signature.
+	 * @param input le flot d'entrï¿½e.
+	 * @return le nombre d'octets lus.
+	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
-	public final Signature sign(PrivateKey key) {
-		return doSign(digest.digest(), key);
+	public final int update(final InputStream input) throws IOException {
+		return digest.update(input);
 	}
-	
+
 	/**
-	 * Génère la signature des octets lus.
+	 * Lit au plus le nombre donnï¿½ d'octets sur le flot.
 	 *
-	 * @param digest le hachage du message.
-	 * @param key la clé privée.
-	 * @return la signature.
+	 * @param input  le flot d'entrï¿½e.
+	 * @param length le nombre d'octets ï¿½ lire.
+	 * @return le nombre d'octets lus.
+	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
-	protected abstract Signature doSign(Digest digest, PrivateKey key);
-	
+	public final int update(final InputStream input, final int length) throws IOException {
+		return digest.update(input, length);
+	}
+
 	/**
-	 * Vérifie la signature des octets lus et remet la machine dans son
-	 * état initial (garde en mémoire le mode génération ou
-	 * vérification et la clé correspondante).
+	 * Vï¿½rifie la signature des octets lus et remet la machine dans son ï¿½tat initial
+	 * (garde en mï¿½moire le mode gï¿½nï¿½ration ou vï¿½rification et la clï¿½
+	 * correspondante).
 	 *
-	 * @param key la clé publique.
+	 * @param key       la clï¿½ publique.
 	 * @param signature the signature.
 	 * @return true si la signature est valide, false sinon.
 	 */
-	public final boolean verify(PublicKey key, Signature signature) {
+	public final boolean verify(final PublicKey key, final Signature signature) {
 		return doVerify(digest.digest(), key, signature);
 	}
-	
-	/**
-	 * Vérifie la signature des octets lus.
-	 *
-	 * @param digest le hachage du message.
-	 * @param key la clé publique.
-	 * @param signature the signature.
-	 * @return true si la signature est valide, false sinon.
-	 */
-	protected abstract boolean doVerify(Digest digest, PublicKey key, Signature signature);
-	
-	/**
-	 * Remet la machine dans son état initial (garde en mémoire le
-	 * mode génération ou vérification et la clé correspondante).
-	 */
-	public final void reset() {
-		digest.reset();
-	}
-	
+
 }

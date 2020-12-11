@@ -18,108 +18,113 @@
 
 package org.leplus.libcrypto;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
 
 /**
- * Pair Clé Privée / Clé Publique DSA.
+ * Pair Clï¿½ Privï¿½e / Clï¿½ Publique DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est défini par la norme
- * <a href="http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS 186-2</a>
- * (<i>Digital Signature Scheme</i>) du NIST.
+ * Le <i>Digital Signature Algorithm</i> est dï¿½fini par la norme <a href=
+ * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
+ * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  *
  * @version $Revision: 1.6 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public final class DSAKeyPair
-	extends KeyPair {
-	
+public final class DSAKeyPair extends KeyPair {
+
 	/**
-	 * Construit une pair de clés DSA à partir de la clé publique et
-	 * de la clé privée.
 	 *
-	 * @param pvk la clé publique.
-	 * @param pbk la clé privée.
 	 */
-	public DSAKeyPair(DSAPrivateKey pvk, DSAPublicKey pbk) {
-		if (!pvk.getP().equals(pbk.getP()))
+	private static final long serialVersionUID = 4535068078804905828L;
+
+	/**
+	 * Construit une pair de clï¿½s DSA ï¿½ partir de la clï¿½ publique et de la clï¿½
+	 * privï¿½e.
+	 *
+	 * @param pvk la clï¿½ publique.
+	 * @param pbk la clï¿½ privï¿½e.
+	 */
+	public DSAKeyPair(final DSAPrivateKey pvk, final DSAPublicKey pbk) {
+		if (!pvk.getP().equals(pbk.getP())) {
 			throw new RuntimeException();
-		if (!pvk.getQ().equals(pbk.getQ()))
+		}
+		if (!pvk.getQ().equals(pbk.getQ())) {
 			throw new RuntimeException();
-		if (!pvk.getG().equals(pbk.getG()))
+		}
+		if (!pvk.getG().equals(pbk.getG())) {
 			throw new RuntimeException();
+		}
 		prvKey = pvk;
 		pubKey = pbk;
 		length = pubKey.length;
 	}
-	
+
 	/**
-	 * Retourne le paramètre P des clés.
+	 * Compare deux pairs de clï¿½s.
 	 *
-	 * @return P.
+	 * @param object la pair ï¿½ comparer.
+	 * @return true si les deux pairs sont ï¿½gaux, false sinon.
 	 */
-	public BigInteger getP() {
-		return ((DSAPublicKey)pubKey).getP();
+	@Override
+	public boolean equals(final Object object) {
+		final KeyPair pair = (KeyPair) object;
+		return ((DSAPublicKey) pubKey).equals(pair.pubKey) && ((DSAPrivateKey) prvKey).equals(pair.prvKey);
 	}
-	
+
 	/**
-	 * Retourne le paramètre Q des clés.
-	 *
-	 * @return Q.
-	 */
-	public BigInteger getQ() {
-		return ((DSAPublicKey)pubKey).getQ();
-	}
-	
-	/**
-	 * Retourne le paramètre G des clés.
+	 * Retourne le paramï¿½tre G des clï¿½s.
 	 *
 	 * @return G.
 	 */
 	public BigInteger getG() {
-		return ((DSAPublicKey)pubKey).getG();
+		return ((DSAPublicKey) pubKey).getG();
 	}
-	
+
 	/**
-	 * Retourne le paramètre X de la clé publique.
+	 * Retourne le paramï¿½tre P des clï¿½s.
+	 *
+	 * @return P.
+	 */
+	public BigInteger getP() {
+		return ((DSAPublicKey) pubKey).getP();
+	}
+
+	/**
+	 * Retourne le paramï¿½tre Q des clï¿½s.
+	 *
+	 * @return Q.
+	 */
+	public BigInteger getQ() {
+		return ((DSAPublicKey) pubKey).getQ();
+	}
+
+	/**
+	 * Retourne le paramï¿½tre X de la clï¿½ publique.
 	 *
 	 * @return X.
 	 */
 	public BigInteger getX() {
-		return ((DSAPrivateKey)prvKey).getX();
+		return ((DSAPrivateKey) prvKey).getX();
 	}
-	
+
 	/**
-	 * Retourne le paramètre Y de la clé privée.
+	 * Retourne le paramï¿½tre Y de la clï¿½ privï¿½e.
 	 *
 	 * @return Y.
 	 */
 	public BigInteger getY() {
-		return ((DSAPublicKey)pubKey).getY();
+		return ((DSAPublicKey) pubKey).getY();
 	}
-	
+
 	/**
-	 * Compare deux pairs de clés.
-	 *
-	 * @param object la pair à comparer.
-	 * @return true si les deux pairs sont égaux, false sinon.
-	 */
-	public boolean equals(Object object) {
-		KeyPair pair = (KeyPair)object;
-		return ((DSAPublicKey)pubKey).equals(pair.pubKey)
-			&& ((DSAPrivateKey)prvKey).equals(pair.prvKey);
-	}
-	
-	/**
-	 * Retourne une valeur de hachage simple pour cette pair de clés.
+	 * Retourne une valeur de hachage simple pour cette pair de clï¿½s.
 	 *
 	 * @return la valeur de hachage.
 	 */
+	@Override
 	public int hashCode() {
 		return pubKey.hashCode() * prvKey.hashCode();
 	}
-	
+
 }

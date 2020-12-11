@@ -18,137 +18,137 @@
 
 package org.leplus.libcrypto;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
- * Machine à Hachages Cryptographiques.
+ * Machine ï¿½ Hachages Cryptographiques.
  *
  * @version $Revision: 1.4 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class DigestEngine {
-	
+
 	/**
-	 * La taille du buffer utilisé ( en octets).
+	 * La taille du buffer utilisï¿½ ( en octets).
 	 */
 	public static final int BUFFER_SIZE = 1024;
-	
+
 	/**
-	 * Lit les octets sur le flot jusqu'à sa fin.
+	 * Gï¿½nï¿½re le hachage des octets lus jusqu'ï¿½ prï¿½sent et remet la machine dans son
+	 * ï¿½tat initial.
 	 *
-	 * @param input le flot d'entrée.
-	 * @return le nombre d'octets lus.
-	 * @throws IOException si une erreure se produit lors de
-	 *         la lecture du flot.
+	 * @return le hachage.
 	 */
-	public final int update(InputStream input)
-		throws IOException {
-		int n = 0;
-		int p = 0;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		while ((p = input.read(buffer)) > 0)
-			n += update(buffer, 0, p);
-		return n;
+	public final Digest digest() {
+		doPadding();
+		final Digest d = doDigest();
+		doReset();
+		return d;
 	}
-	
+
 	/**
-	 * Lit au plus le nombre donné d'octets sur le flot.
+	 * Gï¿½nï¿½re le hachage des octets lus jusqu'ï¿½ prï¿½sent.
 	 *
-	 * @param input le flot d'entrée.
-	 * @param length le nombre d'octets à lire.
-	 * @return le nombre d'octets lus.
-	 * @throws IOException si une erreure se produit lors de
-	 *         la lecture du flot.
+	 * @return le hachage.
 	 */
-	public final int update(InputStream input, int length)
-		throws IOException {
-		int n = 0;
-		int p = 0;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		while (n < length && (p = input.read(buffer, 0, StrictMath.min(1024, length - n))) > 0)
-			n += update(buffer, 0, p);
-		return n;
+	protected abstract Digest doDigest();
+
+	/**
+	 * Gï¿½nï¿½re le padding avant la finalisation du hachage.
+	 *
+	 * @return le nombre d'octets nï¿½cessaires au padding.
+	 */
+	protected abstract int doPadding();
+
+	/**
+	 * Remet la machine dans son ï¿½tat initial.
+	 */
+	protected abstract void doReset();
+
+	/**
+	 * Lit un octet.
+	 *
+	 * @param n l'octet ï¿½ hacher.
+	 */
+	protected abstract void doUpdate(byte n);
+
+	/**
+	 * Remet la machine dans son ï¿½tat initial.
+	 */
+	public final void reset() {
+		doReset();
 	}
-	
+
+	/**
+	 * Lit un octet.
+	 *
+	 * @param n l'octet ï¿½ hacher.
+	 */
+	public final void update(final byte n) {
+		doUpdate(n);
+	}
+
 	/**
 	 * Lit tous les octets du tableau.
 	 *
 	 * @param bytes le tableau d'octets.
 	 * @return le nombre d'octets lus.
 	 */
-	public final int update(byte[] bytes) {
+	public final int update(final byte[] bytes) {
 		return update(bytes, 0, bytes.length);
-	}
-	
-	/**
-	 * Lit au plus le nombre donné d'octets du tableau en commençant à
-	 * l'indice donné.
-	 *
-	 * @param bytes le tableau d'octets.
-	 * @param offset l'indice de départ.
-	 * @param length le nombre d'octets à lire.
-	 * @return le nombre d'octets lus.
-	 */
-	public final int update(byte[] bytes, int offset, int length) {
-		for (int i = 0; i < length; i++)
-			update(bytes[offset + i]);
-		return length;
-	}
-	
-	/**
-	 * Lit un octet.
-	 *
-	 * @param n l'octet à hacher.
-	 */
-	public final void update(byte n) {
-		doUpdate(n);
 	}
 
 	/**
-	 * Lit un octet.
+	 * Lit au plus le nombre donnï¿½ d'octets du tableau en commenï¿½ant ï¿½ l'indice
+	 * donnï¿½.
 	 *
-	 * @param n l'octet à hacher.
+	 * @param bytes  le tableau d'octets.
+	 * @param offset l'indice de dï¿½part.
+	 * @param length le nombre d'octets ï¿½ lire.
+	 * @return le nombre d'octets lus.
 	 */
-	protected abstract void doUpdate(byte n);
-	
-	/**
-	 * Génère le hachage des octets lus jusqu'à présent et remet la
-	 * machine dans son état initial.
-	 *
-	 * @return le hachage.
-	 */
-	public final Digest digest() {
-		doPadding();
-		Digest d = doDigest();
-		doReset();
-		return d;
+	public final int update(final byte[] bytes, final int offset, final int length) {
+		for (int i = 0; i < length; i++) {
+			update(bytes[offset + i]);
+		}
+		return length;
 	}
-	
+
 	/**
-	 * Génère le padding avant la finalisation du hachage.
+	 * Lit les octets sur le flot jusqu'ï¿½ sa fin.
 	 *
-	 * @return le nombre d'octets nécessaires au padding.
+	 * @param input le flot d'entrï¿½e.
+	 * @return le nombre d'octets lus.
+	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
-	protected abstract int doPadding();
-	
-	/**
-	 * Génère le hachage des octets lus jusqu'à présent.
-	 *
-	 * @return le hachage.
-	 */
-	protected abstract Digest doDigest();
-	
-	/**
-	 * Remet la machine dans son état initial.
-	 */
-	public final void reset() {
-		doReset();
+	public final int update(final InputStream input) throws IOException {
+		int n = 0;
+		int p = 0;
+		final byte[] buffer = new byte[BUFFER_SIZE];
+		while ((p = input.read(buffer)) > 0) {
+			n += update(buffer, 0, p);
+		}
+		return n;
 	}
-	
+
 	/**
-	 * Remet la machine dans son état initial.
+	 * Lit au plus le nombre donnï¿½ d'octets sur le flot.
+	 *
+	 * @param input  le flot d'entrï¿½e.
+	 * @param length le nombre d'octets ï¿½ lire.
+	 * @return le nombre d'octets lus.
+	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
-	protected abstract void doReset();
-	
+	public final int update(final InputStream input, final int length) throws IOException {
+		int n = 0;
+		int p = 0;
+		final byte[] buffer = new byte[BUFFER_SIZE];
+		while (n < length && (p = input.read(buffer, 0, StrictMath.min(1024, length - n))) > 0) {
+			n += update(buffer, 0, p);
+		}
+		return n;
+	}
+
 }

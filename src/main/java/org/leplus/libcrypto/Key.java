@@ -19,48 +19,49 @@
 package org.leplus.libcrypto;
 
 import java.io.Serializable;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 /**
- * Clé Cryptographique.
+ * Clï¿½ Cryptographique.
  *
  * @version $Revision: 1.6 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public abstract class Key
-	implements Serializable {
-	
+public abstract class Key implements Serializable {
+
 	/**
-	 * La longueur de la clé (en octets).
+	 *
+	 */
+	private static final long serialVersionUID = -430859166740079170L;
+	/**
+	 * La longueur de la clï¿½ (en octets).
 	 */
 	protected int length;
-	
+
 	/**
-	 * Retourne la longueur de la clé (en octets).
+	 * Compare deux clï¿½s.
 	 *
-	 * @return la longueur de la clé (en octets).
+	 * @param object la clï¿½ ï¿½ comparer.
+	 * @return true si les deux clï¿½s sont ï¿½gales, false sinon.
+	 */
+	@Override
+	public abstract boolean equals(Object object);
+
+	/**
+	 * Retourne la longueur de la clï¿½ (en octets).
+	 *
+	 * @return la longueur de la clï¿½ (en octets).
 	 */
 	public final int getLength() {
 		return length;
 	}
-	
+
 	/**
-	 * Compare deux clés.
-	 *
-	 * @param object la clé à comparer.
-	 * @return true si les deux clés sont égales, false sinon.
-	 */
-	public abstract boolean equals(Object object);
-	
-	/**
-	 * Retourne une valeur de hachage simple pour cette clé.
+	 * Retourne une valeur de hachage simple pour cette clï¿½.
 	 *
 	 * @return la valeur de hachage.
 	 */
+	@Override
 	public abstract int hashCode();
-	
+
 }

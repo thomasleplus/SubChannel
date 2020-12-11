@@ -19,40 +19,45 @@
 package org.leplus.libcrypto;
 
 /**
- * Pair Clé Privée / Clé Publique.
+ * Pair Clï¿½ Privï¿½e / Clï¿½ Publique.
  *
  * @version $Revision: 1.3 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public abstract class KeyPair
-	extends Key {
-	
+public abstract class KeyPair extends Key {
+
 	/**
-	 * La clé privée.
+	 *
+	 */
+	private static final long serialVersionUID = 9054280212735531426L;
+
+	/**
+	 * La clï¿½ privï¿½e.
 	 */
 	protected PrivateKey prvKey;
-	
+
 	/**
-	 * La clé publique.
+	 * La clï¿½ publique.
 	 */
 	protected PublicKey pubKey;
-	
+
 	/**
-	 * Retourne la clé privée.
+	 * Retourne la clï¿½ privï¿½e.
 	 *
-	 * @return la clé privée.
+	 * @return la clï¿½ privï¿½e.
 	 */
 	public final PrivateKey getPrivateKey() {
 		return prvKey;
 	}
-	
+
 	/**
-	 * Retourne la clé publique.
+	 * Retourne la clï¿½ publique.
 	 *
-	 * @return la clé publique.
+	 * @return la clï¿½ publique.
 	 */
 	public final PublicKey getPublicKey() {
 		return pubKey;
 	}
-	
+
 }
