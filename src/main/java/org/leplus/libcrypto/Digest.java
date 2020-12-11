@@ -18,9 +18,9 @@
 
 package org.leplus.libcrypto;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Arrays;
 
@@ -28,35 +28,52 @@ import java.util.Arrays;
  * Hachage Cryptographique.
  *
  * @version $Revision: 1.5 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class Digest {
-	
+
 	/**
 	 * La valeur du hachage.
 	 */
 	protected byte[] value;
-	
+
 	/**
-	 * Retourne la longueur du hachage (en octets).
+	 * Compare deux hachages.
 	 *
-	 * @return la longueur du hachage (en octets).
+	 * @param object le hachage ï¿½ comparer.
+	 * @return true si les deux hachages sont ï¿½gaux, false sinon.
 	 */
-	public final int getLength() {
-		return value.length;
+	@Override
+	public final boolean equals(final Object object) {
+		final Digest digest = (Digest) object;
+		return Arrays.equals(value, digest.value);
 	}
-	
+
 	/**
 	 * Retourne la valeur du hachage sous forme d'octets.
 	 *
 	 * @return le tableau d'octets.
 	 */
 	public final byte[] getBytes() {
-		byte[] copy = new byte[value.length];
+		final byte[] copy = new byte[value.length];
 		System.arraycopy(value, 0, copy, 0, value.length);
 		return copy;
 	}
-	
+
+	/**
+	 * Retourne la reprï¿½sentation hï¿½xadï¿½cimal du hachage.
+	 *
+	 * @return la chaï¿½ne de caractï¿½re.
+	 */
+	public final String getHex() {
+		String s = getInt().toString(16);
+		while (s.length() < getLength() << 1) {
+			s = "0" + s;
+		}
+		return s;
+	}
+
 	/**
 	 * Retourne la valeur du hachage sous forme d'un grand entier.
 	 *
@@ -65,86 +82,68 @@ public abstract class Digest {
 	public final BigInteger getInt() {
 		return new BigInteger(1, getBytes());
 	}
-	
+
 	/**
-	 * Retourne la représentation héxadécimal du hachage.
+	 * Retourne la longueur du hachage (en octets).
 	 *
-	 * @return la chaîne de caractère.
+	 * @return la longueur du hachage (en octets).
 	 */
-	public final String getHex() {
-		String s = getInt().toString(16);
-		while (s.length() < (getLength() << 1))
-			s = "0" + s;
-		return s;
+	public final int getLength() {
+		return value.length;
 	}
-	
-	/**
-	 * Écrit les octets du hachage sur le flot.
-	 *
-	 * @param output le flot de sortie.
-	 * @return le nombre d'octets écrits.
-	 * @throws IOException si une erreure se produit lors de
-	 *         l'écriture sur le flot.
-	 */
-	public final int writeBytes(OutputStream output)
-		throws IOException {
-		byte[] bytes = getBytes();
-		output.write(bytes);
-		return bytes.length;
-	}
-	
-	/**
-	 * Écrit la représentation héxadécimale du hachage sur le flot.
-	 *
-	 * @param output le flot de sortie.
-	 * @return le nombre de caractères écrits.
-	 * @throws IOException si une erreure se produit lors de
-	 *         l'écriture sur le flot.
-	 */
-	public final int writeHex(OutputStream output)
-		throws IOException {
-		String hex = getHex();
-		PrintStream print = new PrintStream(output);
-		print.print(hex);
-		return hex.length();
-	}
-	
-	/**
-	 * Écrit la représentation décimale du hachage sur le flot.
-	 *
-	 * @param output le flot de sortie.
-	 * @return le nombre de caractères écrits.
-	 * @throws IOException si une erreure se produit lors de
-	 *         l'écriture sur le flot.
-	 */
-	public final int writeInt(OutputStream output)
-		throws IOException {
-		String dec = getInt().toString();
-		PrintStream print = new PrintStream(output);
-		print.print(dec);
-		return dec.length();
-	}
-	
-	/**
-	 * Compare deux hachages.
-	 *
-	 * @param object le hachage à comparer.
-	 * @return true si les deux hachages sont égaux, false sinon.
-	 */
-	public final boolean equals(Object object) {
-		Digest digest = (Digest)object;
-		return Arrays.equals(value, digest.value);
-	}
-	
+
 	/**
 	 * Retourne une valeur de hachage simple pour ce hachage.
 	 *
 	 * @return la valeur de hachage.
 	 */
+	@Override
 	public final int hashCode() {
 		int j = 0;
-		for (int i = 0; i < value.length; i++)
+		for (int i = 0; i < value.length; i++) {
 			j *= value[i];
+		}
 		return j;
+	}
+
+	/**
+	 * ï¿½crit les octets du hachage sur le flot.
+	 *
+	 * @param output le flot de sortie.
+	 * @return le nombre d'octets ï¿½crits.
+	 * @throws IOException si une erreure se produit lors de l'ï¿½criture sur le flot.
+	 */
+	public final int writeBytes(final OutputStream output) throws IOException {
+		final byte[] bytes = getBytes();
+		output.write(bytes);
+		return bytes.length;
+	}
+
+	/**
+	 * ï¿½crit la reprï¿½sentation hï¿½xadï¿½cimale du hachage sur le flot.
+	 *
+	 * @param output le flot de sortie.
+	 * @return le nombre de caractï¿½res ï¿½crits.
+	 * @throws IOException si une erreure se produit lors de l'ï¿½criture sur le flot.
+	 */
+	public final int writeHex(final OutputStream output) throws IOException {
+		final String hex = getHex();
+		final PrintStream print = new PrintStream(output);
+		print.print(hex);
+		return hex.length();
+	}
+
+	/**
+	 * ï¿½crit la reprï¿½sentation dï¿½cimale du hachage sur le flot.
+	 *
+	 * @param output le flot de sortie.
+	 * @return le nombre de caractï¿½res ï¿½crits.
+	 * @throws IOException si une erreure se produit lors de l'ï¿½criture sur le flot.
+	 */
+	public final int writeInt(final OutputStream output) throws IOException {
+		final String dec = getInt().toString();
+		final PrintStream print = new PrintStream(output);
+		print.print(dec);
+		return dec.length();
 	}
 }

@@ -19,43 +19,44 @@
 package org.leplus.libcrypto;
 
 /**
- * Générateur de Pair de Clés Cryptographiques.
+ * Gï¿½nï¿½rateur de Pair de Clï¿½s Cryptographiques.
  *
  * @version $Revision: 1.3 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class KeyPairGenerator {
-	
+
 	/**
-	 * Retourne la longueur des clés générées (en octets).
+	 * Gï¿½nï¿½re une nouvelle pair de clï¿½s.
 	 *
-	 * @return la longueur des clés (en octets).
+	 * @return la pair de clï¿½s.
 	 */
-	public final int getLength() {
-		return doGetLength();
-	}
-	
+	protected abstract KeyPair doGenerateKeyPair();
+
 	/**
-	 * Retourne la longueur des clés générées (en octets).
+	 * Retourne la longueur des clï¿½s gï¿½nï¿½rï¿½es (en octets).
 	 *
-	 * @return la longueur des clés (en octets).
+	 * @return la longueur des clï¿½s (en octets).
 	 */
 	protected abstract int doGetLength();
-	
+
 	/**
-	 * Génère une nouvelle pair de clés.
+	 * Gï¿½nï¿½re une nouvelle pair de clï¿½s.
 	 *
-	 * @return la pair de clés.
+	 * @return la pair de clï¿½s.
 	 */
 	public final KeyPair generateKeyPair() {
 		return doGenerateKeyPair();
 	}
-	
+
 	/**
-	 * Génère une nouvelle pair de clés.
+	 * Retourne la longueur des clï¿½s gï¿½nï¿½rï¿½es (en octets).
 	 *
-	 * @return la pair de clés.
+	 * @return la longueur des clï¿½s (en octets).
 	 */
-	protected abstract KeyPair doGenerateKeyPair();
-	
+	public final int getLength() {
+		return doGetLength();
+	}
+
 }

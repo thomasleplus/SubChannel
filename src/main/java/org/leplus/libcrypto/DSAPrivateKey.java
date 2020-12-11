@@ -18,114 +18,118 @@
 
 package org.leplus.libcrypto;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
 import java.math.BigInteger;
 
 /**
- * Clé Privée DSA.
+ * Clï¿½ Privï¿½e DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est défini par la norme
- * <a href="http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS 186-2</a>
- * (<i>Digital Signature Scheme</i>) du NIST.
+ * Le <i>Digital Signature Algorithm</i> est dï¿½fini par la norme <a href=
+ * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
+ * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  *
  * @version $Revision: 1.6 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public final class DSAPrivateKey
-	extends PrivateKey {
-	
+public final class DSAPrivateKey extends PrivateKey {
+
 	/**
-	 * Le paramètre p.
-	 */
-	private BigInteger P;
-	
-	/**
-	 * Le paramètre q.
-	 */
-	private BigInteger Q;
-	
-	/**
-	 * Le paramètre g.
-	 */
-	private BigInteger G;
-	
-	/**
-	 * Le paramètre x.
-	 */
-	private BigInteger X;
-	
-	/**
-	 * Construit une clé privée DSA à partir de ses paramètres.
 	 *
-	 * @param p le paramètre p.
-	 * @param q le paramètre q.
-	 * @param g le paramètre g.
-	 * @param x le paramètre x.
 	 */
-	protected DSAPrivateKey(BigInteger p, BigInteger q, BigInteger g, BigInteger x) {
+	private static final long serialVersionUID = -6744540637294417567L;
+
+	/**
+	 * Le paramï¿½tre p.
+	 */
+	private final BigInteger P;
+
+	/**
+	 * Le paramï¿½tre q.
+	 */
+	private final BigInteger Q;
+
+	/**
+	 * Le paramï¿½tre g.
+	 */
+	private final BigInteger G;
+
+	/**
+	 * Le paramï¿½tre x.
+	 */
+	private final BigInteger X;
+
+	/**
+	 * Construit une clï¿½ privï¿½e DSA ï¿½ partir de ses paramï¿½tres.
+	 *
+	 * @param p le paramï¿½tre p.
+	 * @param q le paramï¿½tre q.
+	 * @param g le paramï¿½tre g.
+	 * @param x le paramï¿½tre x.
+	 */
+	protected DSAPrivateKey(final BigInteger p, final BigInteger q, final BigInteger g, final BigInteger x) {
 		P = p;
 		Q = q;
 		G = g;
 		X = x;
-		length = (int)StrictMath.ceil((double)P.bitLength() / 128) * 16;
+		length = (int) StrictMath.ceil((double) P.bitLength() / 128) * 16;
 	}
-	
+
 	/**
-	 * Retourne le paramètre p.
+	 * Compare deux clï¿½s.
 	 *
-	 * @return le paramètre p.
+	 * @param object la clï¿½ ï¿½ comparer.
+	 * @return true si les deux clï¿½s sont ï¿½gales, false sinon.
 	 */
-	public BigInteger getP() {
-		return P;
+	@Override
+	public boolean equals(final Object object) {
+		final DSAPrivateKey key = (DSAPrivateKey) object;
+		return P.equals(key.P) && Q.equals(key.Q) && G.equals(key.G) && X.equals(key.X);
 	}
-	
+
 	/**
-	 * Retourne le paramètre q.
+	 * Retourne le paramï¿½tre g.
 	 *
-	 * @return le paramètre q.
-	 */
-	public BigInteger getQ() {
-		return Q;
-	}
-	
-	/**
-	 * Retourne le paramètre g.
-	 *
-	 * @return le paramètre g.
+	 * @return le paramï¿½tre g.
 	 */
 	public BigInteger getG() {
 		return G;
 	}
-	
+
 	/**
-	 * Retourne le paramètre x.
+	 * Retourne le paramï¿½tre p.
 	 *
-	 * @return le paramètre x.
+	 * @return le paramï¿½tre p.
+	 */
+	public BigInteger getP() {
+		return P;
+	}
+
+	/**
+	 * Retourne le paramï¿½tre q.
+	 *
+	 * @return le paramï¿½tre q.
+	 */
+	public BigInteger getQ() {
+		return Q;
+	}
+
+	/**
+	 * Retourne le paramï¿½tre x.
+	 *
+	 * @return le paramï¿½tre x.
 	 */
 	public BigInteger getX() {
 		return X;
 	}
-	
+
 	/**
-	 * Compare deux clés.
-	 *
-	 * @param object la clé à comparer.
-	 * @return true si les deux clés sont égales, false sinon.
-	 */
-	public boolean equals(Object object) {
-		DSAPrivateKey key = (DSAPrivateKey)object;
-		return P.equals(key.P) && Q.equals(key.Q) && G.equals(key.G) && X.equals(key.X);
-	}
-	
-	/**
-	 * Retourne une valeur de hachage simple pour cette clé.
+	 * Retourne une valeur de hachage simple pour cette clï¿½.
 	 *
 	 * @return la valeur de hachage.
 	 */
+	@Override
 	public int hashCode() {
 		return P.hashCode() * Q.hashCode() * G.hashCode() * X.hashCode();
 	}
-	
+
 }

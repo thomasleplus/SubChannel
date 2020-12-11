@@ -21,94 +21,100 @@ package org.leplus.libcrypto;
 import java.util.Random;
 
 /**
- * Générateur de Nombres Pseudo-Aléatoires fournit par SUN Microsystem.
+ * Gï¿½nï¿½rateur de Nombres Pseudo-Alï¿½atoires fournit par SUN Microsystem.
  *
  * @version $Revision: 1.4 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public final class JavaPRNGenerator
-	extends PRNGenerator {
-	
+public final class JavaPRNGenerator extends PRNGenerator {
+
 	/**
-	 * Le générateur pseudo-aléatoire.
+	 * Le gï¿½nï¿½rateur pseudo-alï¿½atoire.
 	 */
 	private final Random random;
-	
+
 	/**
-	 * Construit le générateur pseudo-aléatoire.
+	 * Construit le gï¿½nï¿½rateur pseudo-alï¿½atoire.
 	 */
 	public JavaPRNGenerator() {
 		random = new Random();
 	}
-	
+
 	/**
-	 * Retourne un bit pseudo-aléatoire.
+	 * Retourne un bit pseudo-alï¿½atoire.
 	 *
-	 * @return le bit pseudo-aléatoire.
+	 * @return le bit pseudo-alï¿½atoire.
 	 */
+	@Override
 	public boolean getBit() {
 		return random.nextBoolean();
 	}
-	
+
 	/**
-	 * Retourne un entier court pseudo-aléatoire.
+	 * Retourne un entier court pseudo-alï¿½atoire.
 	 *
-	 * @return l'entier court pseudo-aléatoire.
+	 * @return l'entier court pseudo-alï¿½atoire.
 	 */
+	@Override
 	public byte getByte() {
-		byte[] bytes = new byte[1];
+		final byte[] bytes = new byte[1];
 		random.nextBytes(bytes);
 		return bytes[0];
 	}
-	
+
 	/**
-	 * Retourne un entier pseudo-aléatoire.
+	 * Retourne un tableau d'octets alï¿½atoires de la longueur alï¿½atoire.
 	 *
-	 * @return l'entier pseudo-aléatoire.
+	 * @param length la longueur voulue.
+	 * @return le tableau d'octets.
 	 */
-	public int getInt() {
-		return random.nextInt();
+	@Override
+	public byte[] getBytes(final int length) {
+		final byte[] bytes = new byte[length];
+		random.nextBytes(bytes);
+		return bytes;
 	}
-	
+
 	/**
-	 * Retourne un entier long pseudo-aléatoire.
+	 * Retourne un nombre rï¿½el double prï¿½cision pseudo-alï¿½atoire compris entre 0 et
+	 * 1.
 	 *
-	 * @return l'entier long pseudo-aléatoire.
+	 * @return le rï¿½el double prï¿½cision pseudo-alï¿½atoire.
 	 */
-	public long getLong() {
-		return random.nextLong();
-	}
-	
-	/**
-	 * Retourne un nombre réel pseudo-aléatoire
-	 * compris entre 0 et 1.
-	 *
-	 * @return le réel pseudo-aléatoire.
-	 */
-	public float getFloat() {
-		return random.nextFloat();
-	}
-	
-	/**
-	 * Retourne un nombre réel double précision pseudo-aléatoire
-	 * compris entre 0 et 1.
-	 *
-	 * @return le réel double précision pseudo-aléatoire.
-	 */
+	@Override
 	public double getDouble() {
 		return random.nextDouble();
 	}
 
 	/**
-	 * Retourne un tableau d'octets aléatoires de la longueur aléatoire.
+	 * Retourne un nombre rï¿½el pseudo-alï¿½atoire compris entre 0 et 1.
 	 *
-	 * @param length la longueur voulue.
-	 * @return le tableau d'octets.
+	 * @return le rï¿½el pseudo-alï¿½atoire.
 	 */
-	public byte[] getBytes(int length) {
-		byte[] bytes = new byte[length];
-		random.nextBytes(bytes);
-		return bytes;
+	@Override
+	public float getFloat() {
+		return random.nextFloat();
 	}
-	
+
+	/**
+	 * Retourne un entier pseudo-alï¿½atoire.
+	 *
+	 * @return l'entier pseudo-alï¿½atoire.
+	 */
+	@Override
+	public int getInt() {
+		return random.nextInt();
+	}
+
+	/**
+	 * Retourne un entier long pseudo-alï¿½atoire.
+	 *
+	 * @return l'entier long pseudo-alï¿½atoire.
+	 */
+	@Override
+	public long getLong() {
+		return random.nextLong();
+	}
+
 }

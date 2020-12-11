@@ -18,101 +18,106 @@
 
 package org.leplus.libcrypto;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
 import java.math.BigInteger;
 
 /**
  * Signature Cryptographique DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est défini par la norme
- * <a href="http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS 186-2</a>
- * (<i>Digital Signature Scheme</i>) du NIST.
+ * Le <i>Digital Signature Algorithm</i> est dï¿½fini par la norme <a href=
+ * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
+ * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  *
  * @version $Revision: 1.6 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public final class DSASignature
-	extends Signature {
-	
+public final class DSASignature extends Signature {
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 4361487488030607401L;
+
 	/**
 	 * La longueur en octets des signatures DSA.
 	 */
 	public static final int LENGTH = 20;
-	
+
 	/**
-	 * La longueur en octets des signatures DSA encodées.
+	 * La longueur en octets des signatures DSA encodï¿½es.
 	 */
 	public static final int ENCODED_LENGTH = 46;
-	
+
 	/**
-	 * Le paramètre r.
+	 * Le paramï¿½tre r.
 	 */
-	private BigInteger R;
-	
+	private final BigInteger R;
+
 	/**
-	 * Le paramètre s.
+	 * Le paramï¿½tre s.
 	 */
-	private BigInteger S;
-	
+	private final BigInteger S;
+
 	/**
-	 * Construit une signature DSA à partir de ses paramètres.
+	 * Construit une signature DSA ï¿½ partir de ses paramï¿½tres.
 	 *
-	 * @param r le paramètre r.
-	 * @param s le paramètre s.
+	 * @param r le paramï¿½tre r.
+	 * @param s le paramï¿½tre s.
 	 */
-	protected DSASignature(BigInteger r, BigInteger s) {
+	protected DSASignature(final BigInteger r, final BigInteger s) {
 		R = r;
 		S = s;
 		length = LENGTH;
 	}
-	
-	/**
-	 * Retourne le paramètre R de la signature.
-	 *
-	 * @return le paramètre R.
-	 */
-	public BigInteger getR() {
-		return R;
-	}
-	
-	/**
-	 * Retourne le paramètre S de la signature.
-	 *
-	 * @return le paramètre S.
-	 */
-	public BigInteger getS() {
-		return S;
-	}
-	
+
 	/**
 	 * Retourne la longueur de la signature (en octets).
 	 *
 	 * @return la longueur de la signature (en octets).
 	 */
+	@Override
 	protected int doGetLength() {
 		return LENGTH;
 	}
-	
+
 	/**
 	 * Compare deux signatures.
 	 *
-	 * @param object la signature à comparer.
-	 * @return true si les deux signatures sont égales, false sinon.
+	 * @param object la signature ï¿½ comparer.
+	 * @return true si les deux signatures sont ï¿½gales, false sinon.
 	 */
-	public boolean equals(Object object) {
-		DSASignature signature = (DSASignature)object;
+	@Override
+	public boolean equals(final Object object) {
+		final DSASignature signature = (DSASignature) object;
 		return R.equals(signature.R) && S.equals(signature.S);
 	}
-	
+
+	/**
+	 * Retourne le paramï¿½tre R de la signature.
+	 *
+	 * @return le paramï¿½tre R.
+	 */
+	public BigInteger getR() {
+		return R;
+	}
+
+	/**
+	 * Retourne le paramï¿½tre S de la signature.
+	 *
+	 * @return le paramï¿½tre S.
+	 */
+	public BigInteger getS() {
+		return S;
+	}
+
 	/**
 	 * Retourne une valeur de hachage simple pour cette signature.
 	 *
 	 * @return la valeur de hachage.
 	 */
+	@Override
 	public int hashCode() {
 		return R.hashCode() * S.hashCode();
 	}
-	
+
 }

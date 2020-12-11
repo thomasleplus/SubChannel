@@ -21,43 +21,44 @@ package org.leplus.libcrypto;
 import java.math.BigInteger;
 
 /**
- * Machine à Signatures DSA.
+ * Machine ï¿½ Signatures DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est défini par la norme
- * <a href="http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS 186-2</a>
- * (<i>Digital Signature Scheme</i>) du NIST.
+ * Le <i>Digital Signature Algorithm</i> est dï¿½fini par la norme <a href=
+ * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
+ * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  *
  * @version $Revision: 1.3 $
- * @author  Thomas Leplus &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
+ * @author Thomas Leplus
+ *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-public final class DSASignatureEngine
-	extends SignatureEngine {
-	
+public final class DSASignatureEngine extends SignatureEngine {
+
 	/**
-	 * Le générateur de nombres pseudo-aléatoires.
+	 * Le gï¿½nï¿½rateur de nombres pseudo-alï¿½atoires.
 	 */
 	private final PRNGenerator random;
-	
+
 	/**
-	 * Construit une machine à signatures DSA.
+	 * Construit une machine ï¿½ signatures DSA.
 	 *
-	 * @param prng le générateur de nombres pseudo-aléatoires utilisé
-	 *             par la machine de signatures DSA.
+	 * @param prng le gï¿½nï¿½rateur de nombres pseudo-alï¿½atoires utilisï¿½ par la machine
+	 *             de signatures DSA.
 	 */
-	public DSASignatureEngine(PRNGenerator prng) {
+	public DSASignatureEngine(final PRNGenerator prng) {
 		random = prng;
 		digest = new SHA1DigestEngine();
 	}
-	
+
 	/**
-	 * Génère la signature des octets lus.
+	 * Gï¿½nï¿½re la signature des octets lus.
 	 *
 	 * @param digest le hachage du message.
-	 * @param key la clé privée.
+	 * @param key    la clï¿½ privï¿½e.
 	 * @return la signature.
 	 */
-	protected Signature doSign(Digest digest, PrivateKey key) {
-		DSAPrivateKey pk = (DSAPrivateKey)key;
+	@Override
+	protected Signature doSign(final Digest digest, final PrivateKey key) {
+		final DSAPrivateKey pk = (DSAPrivateKey) key;
 		BigInteger k, t, r, s;
 		do {
 			do {
@@ -69,27 +70,31 @@ public final class DSASignatureEngine
 		} while (s.signum() == 0);
 		return new DSASignature(r, s);
 	}
-	
+
 	/**
-	 * Vérifie la signature des octets lus.
+	 * Vï¿½rifie la signature des octets lus.
 	 *
-	 * @param digest le hachage du message.
-	 * @param key la clé publique.
+	 * @param digest    le hachage du message.
+	 * @param key       la clï¿½ publique.
 	 * @param signature the signature.
 	 * @return true si la signature est valide, false sinon.
 	 */
-	protected boolean doVerify(Digest digest, PublicKey key, Signature signature) {
-		DSAPublicKey pk = (DSAPublicKey)key;
-		DSASignature sg = (DSASignature)signature;
-		if (sg.getR().signum() <= 0 || sg.getR().compareTo(pk.getQ()) >= 0)
+	@Override
+	protected boolean doVerify(final Digest digest, final PublicKey key, final Signature signature) {
+		final DSAPublicKey pk = (DSAPublicKey) key;
+		final DSASignature sg = (DSASignature) signature;
+		if (sg.getR().signum() <= 0 || sg.getR().compareTo(pk.getQ()) >= 0) {
 			return false;
-		if (sg.getS().signum() <= 0 || sg.getS().compareTo(pk.getQ()) >= 0)
+		}
+		if (sg.getS().signum() <= 0 || sg.getS().compareTo(pk.getQ()) >= 0) {
 			return false;
-		BigInteger w = sg.getS().modInverse(pk.getQ());
-		BigInteger u1 = digest.getInt().multiply(w).mod(pk.getQ());
-		BigInteger u2 = sg.getR().multiply(w).mod(pk.getQ());
-		BigInteger v = pk.getG().modPow(u1, pk.getP()).multiply(pk.getY().modPow(u2, pk.getP())).mod(pk.getP()).mod(pk.getQ());
+		}
+		final BigInteger w = sg.getS().modInverse(pk.getQ());
+		final BigInteger u1 = digest.getInt().multiply(w).mod(pk.getQ());
+		final BigInteger u2 = sg.getR().multiply(w).mod(pk.getQ());
+		final BigInteger v = pk.getG().modPow(u1, pk.getP()).multiply(pk.getY().modPow(u2, pk.getP())).mod(pk.getP())
+				.mod(pk.getQ());
 		return v.compareTo(sg.getR()) == 0;
 	}
-	
+
 }
