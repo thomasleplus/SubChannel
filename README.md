@@ -1,7 +1,7 @@
 # SubChannel
 
-![Maven](https://github.com/thomasleplus/SubChannel/workflows/Maven/badge.svg)
-![CodeQL](https://github.com/thomasleplus/SubChannel/workflows/CodeQL/badge.svg)
+[![Maven](https://github.com/thomasleplus/SubChannel/workflows/Maven/badge.svg)](https://github.com/thomasleplus/SubChannel/actions?query=workflow:"Maven")
+[![CodeQL](https://github.com/thomasleplus/SubChannel/workflows/CodeQL/badge.svg)](https://github.com/thomasleplus/SubChannel/actions?query=workflow:"CodeQL")
 
 As part of my exchange with the University of Montreal , I wrote, in collaboration with Pierre Turlan, a paper on subliminal channels (supervised by Stefan Wolf). Most of my work was focused on the DSA algorithm. The project includes a practical implemenation of subliminal channel in DSA.
 
