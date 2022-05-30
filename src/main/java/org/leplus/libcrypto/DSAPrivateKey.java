@@ -1,6 +1,7 @@
 package org.leplus.libcrypto;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  * Cl� Priv�e DSA.
@@ -49,24 +50,25 @@ public final class DSAPrivateKey extends PrivateKey {
 	 * @param x le param�tre x.
 	 */
 	protected DSAPrivateKey(final BigInteger p, final BigInteger q, final BigInteger g, final BigInteger x) {
+        super((int) StrictMath.ceil((double) p.bitLength() / 128) * 16);
 		P = p;
 		Q = q;
 		G = g;
 		X = x;
-		length = (int) StrictMath.ceil((double) P.bitLength() / 128) * 16;
 	}
 
-	/**
-	 * Compare deux cl�s.
-	 *
-	 * @param object la cl� � comparer.
-	 * @return true si les deux cl�s sont �gales, false sinon.
-	 */
 	@Override
-	public boolean equals(final Object object) {
-		final DSAPrivateKey key = (DSAPrivateKey) object;
-		return P.equals(key.P) && Q.equals(key.Q) && G.equals(key.G) && X.equals(key.X);
-	}
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DSAPrivateKey other = (DSAPrivateKey) obj;
+        return Objects.equals(G, other.G) && Objects.equals(P, other.P)
+                && Objects.equals(Q, other.Q) && Objects.equals(X, other.X);
+    }
 
 	/**
 	 * Retourne le param�tre g.
@@ -104,14 +106,12 @@ public final class DSAPrivateKey extends PrivateKey {
 		return X;
 	}
 
-	/**
-	 * Retourne une valeur de hachage simple pour cette cl�.
-	 *
-	 * @return la valeur de hachage.
-	 */
 	@Override
-	public int hashCode() {
-		return P.hashCode() * Q.hashCode() * G.hashCode() * X.hashCode();
-	}
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + Objects.hash(G, P, Q, X);
+        return result;
+    }
 
 }

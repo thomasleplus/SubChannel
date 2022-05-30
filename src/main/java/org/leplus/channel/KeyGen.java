@@ -19,6 +19,8 @@ import org.leplus.libcrypto.DSAKeyPair;
 import org.leplus.libcrypto.DSAKeyPairGenerator;
 import org.leplus.libcrypto.JavaPRNGenerator;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Application de g�n�ration de cl�.
  *
@@ -26,6 +28,7 @@ import org.leplus.libcrypto.JavaPRNGenerator;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
+@SuppressFBWarnings("PATH_TRAVERSAL_IN")
 public final class KeyGen implements ActionListener {
 
 	private static final String[] sizes = { "1024", "960", "896", "832", "768", "704", "640", "576", "512" };
@@ -85,16 +88,10 @@ public final class KeyGen implements ActionListener {
 			final DSAKeyPairGenerator g = new DSAKeyPairGenerator(new JavaPRNGenerator(), size, 100);
 			final DSAKeyPair kp = (DSAKeyPair) g.generateKeyPair();
 			final File pubKey = new File(pubField.getText());
-			if (!pubKey.exists()) {
-				pubKey.createNewFile();
-			}
 			final ObjectOutputStream pubStream = new ObjectOutputStream(new FileOutputStream(pubKey));
 			pubStream.writeObject(kp.getPublicKey());
 			pubStream.close();
 			final File privKey = new File(privField.getText());
-			if (!privKey.exists()) {
-				privKey.createNewFile();
-			}
 			final ObjectOutputStream privStream = new ObjectOutputStream(new FileOutputStream(privKey));
 			privStream.writeObject(kp.getPrivateKey());
 			privStream.close();
@@ -121,14 +118,15 @@ public final class KeyGen implements ActionListener {
 		if (string.length() < 50) {
 			return string + "<br>";
 		}
-		String result = string.substring(0, 49) + "<br>";
+		StringBuilder result = new StringBuilder();
+		result.append(string.substring(0, 49)).append("<br>");
 		int i = 50;
 		while (i <= string.length() - 50) {
-			result += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + string.substring(i, i + 49) + "<br>";
+			result.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(string.substring(i, i + 49)).append("<br>");
 			i += 50;
 		}
-		result += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + string.substring(i) + "<br>";
-		return result;
+		result.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(string.substring(i)).append("<br>");
+		return result.toString();
 	}
 
 }

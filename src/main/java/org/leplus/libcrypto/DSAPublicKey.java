@@ -1,6 +1,7 @@
 package org.leplus.libcrypto;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  * Cl� Publique DSA.
@@ -49,24 +50,25 @@ public final class DSAPublicKey extends PublicKey {
 	 * @param y le param�tre y.
 	 */
 	protected DSAPublicKey(final BigInteger p, final BigInteger q, final BigInteger g, final BigInteger y) {
+        super((int) StrictMath.ceil((double) p.bitLength() / 128) * 16);
 		P = p;
 		Q = q;
 		G = g;
 		Y = y;
-		length = (int) StrictMath.ceil((double) P.bitLength() / 128) * 16;
 	}
 
-	/**
-	 * Compare deux cl�s.
-	 *
-	 * @param object la cl� � comparer.
-	 * @return true si les deux cl�s sont �gales, false sinon.
-	 */
 	@Override
-	public boolean equals(final Object object) {
-		final DSAPublicKey key = (DSAPublicKey) object;
-		return P.equals(key.P) && Q.equals(key.Q) && G.equals(key.G) && Y.equals(key.Y);
-	}
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DSAPublicKey other = (DSAPublicKey) obj;
+        return Objects.equals(G, other.G) && Objects.equals(P, other.P)
+                && Objects.equals(Q, other.Q) && Objects.equals(Y, other.Y);
+    }
 
 	/**
 	 * Retourne le param�tre g.
@@ -104,14 +106,12 @@ public final class DSAPublicKey extends PublicKey {
 		return Y;
 	}
 
-	/**
-	 * Retourne une valeur de hachage simple pour cette cl�.
-	 *
-	 * @return la valeur de hachage.
-	 */
 	@Override
-	public int hashCode() {
-		return P.hashCode() * Q.hashCode() * Y.hashCode() * G.hashCode();
-	}
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + Objects.hash(G, P, Q, Y);
+        return result;
+    }
 
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.math.BigInteger;
 
@@ -20,6 +21,8 @@ import org.leplus.libcrypto.DSASignatureEngine;
 import org.leplus.libcrypto.JavaPRNGenerator;
 import org.leplus.libcrypto.SHA1DigestEngine;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Application de v�rification de signature.
  *
@@ -27,6 +30,7 @@ import org.leplus.libcrypto.SHA1DigestEngine;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
+@SuppressFBWarnings({"OBJECT_DESERIALIZATION", "PATH_TRAVERSAL_IN"})
 public final class Verify implements ActionListener {
 
 	private final JFrame mainFrame;
@@ -116,7 +120,7 @@ public final class Verify implements ActionListener {
 			msg.getContentPane().add(pnl);
 			msg.pack();
 			msg.show();
-		} catch (final Exception ex) {
+		} catch (final IOException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
 		mainFrame.dispose();
@@ -126,14 +130,15 @@ public final class Verify implements ActionListener {
 		if (string.length() < 50) {
 			return string + "<br>";
 		}
-		String result = string.substring(0, 49) + "<br>";
+		StringBuilder result = new StringBuilder();
+		result.append(string.substring(0, 49)).append("<br>");
 		int i = 50;
 		while (i <= string.length() - 50) {
-			result += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + string.substring(i, i + 49) + "<br>";
+			result.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(string.substring(i, i + 49)).append("<br>");
 			i += 50;
 		}
-		result += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + string.substring(i) + "<br>";
-		return result;
+		result.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(string.substring(i)).append("<br>");
+		return result.toString();
 	}
 
 }

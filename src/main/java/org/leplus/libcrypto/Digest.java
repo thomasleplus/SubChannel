@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -20,17 +21,17 @@ public abstract class Digest {
 	 */
 	protected byte[] value;
 
-	/**
-	 * Compare deux hachages.
-	 *
-	 * @param object le hachage � comparer.
-	 * @return true si les deux hachages sont �gaux, false sinon.
-	 */
 	@Override
-	public final boolean equals(final Object object) {
-		final Digest digest = (Digest) object;
-		return Arrays.equals(value, digest.value);
-	}
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Digest other = (Digest) obj;
+        return Arrays.equals(value, other.value);
+    }
 
 	/**
 	 * Retourne la valeur du hachage sous forme d'octets.
@@ -74,19 +75,13 @@ public abstract class Digest {
 		return value.length;
 	}
 
-	/**
-	 * Retourne une valeur de hachage simple pour ce hachage.
-	 *
-	 * @return la valeur de hachage.
-	 */
 	@Override
-	public final int hashCode() {
-		int j = 0;
-		for (int i = 0; i < value.length; i++) {
-			j *= value[i];
-		}
-		return j;
-	}
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + Arrays.hashCode(value);
+        return result;
+    }
 
 	/**
 	 * �crit les octets du hachage sur le flot.
@@ -110,7 +105,7 @@ public abstract class Digest {
 	 */
 	public final int writeHex(final OutputStream output) throws IOException {
 		final String hex = getHex();
-		final PrintStream print = new PrintStream(output);
+		final PrintStream print = new PrintStream(output, true, StandardCharsets.UTF_8);
 		print.print(hex);
 		return hex.length();
 	}
@@ -124,7 +119,7 @@ public abstract class Digest {
 	 */
 	public final int writeInt(final OutputStream output) throws IOException {
 		final String dec = getInt().toString();
-		final PrintStream print = new PrintStream(output);
+		final PrintStream print = new PrintStream(output, true, StandardCharsets.UTF_8);
 		print.print(dec);
 		return dec.length();
 	}

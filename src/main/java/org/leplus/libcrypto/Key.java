@@ -1,6 +1,7 @@
 package org.leplus.libcrypto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Cl� Cryptographique.
@@ -15,19 +16,11 @@ public abstract class Key implements Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = -430859166740079170L;
+	
 	/**
 	 * La longueur de la cl� (en octets).
 	 */
-	protected int length;
-
-	/**
-	 * Compare deux cl�s.
-	 *
-	 * @param object la cl� � comparer.
-	 * @return true si les deux cl�s sont �gales, false sinon.
-	 */
-	@Override
-	public abstract boolean equals(Object object);
+	private final int length;
 
 	/**
 	 * Retourne la longueur de la cl� (en octets).
@@ -38,12 +31,27 @@ public abstract class Key implements Serializable {
 		return length;
 	}
 
-	/**
-	 * Retourne une valeur de hachage simple pour cette cl�.
-	 *
-	 * @return la valeur de hachage.
-	 */
-	@Override
-	public abstract int hashCode();
+    public Key(int length) {
+        super();
+        this.length = length;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(length);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Key other = (Key) obj;
+        return length == other.length;
+    }
+
 
 }

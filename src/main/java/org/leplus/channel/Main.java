@@ -37,7 +37,7 @@ public final class Main {
 
 	}
 
-	public static void main(final String[] args) throws Exception {
+	public static void main(final String[] args) {
 
 		final JFrame mainFrame = new JFrame("DSA Subliminal");
 

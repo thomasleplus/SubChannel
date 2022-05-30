@@ -28,31 +28,30 @@ public final class DSAKeyPair extends KeyPair {
 	 * @param pbk la cl� priv�e.
 	 */
 	public DSAKeyPair(final DSAPrivateKey pvk, final DSAPublicKey pbk) {
-		if (!pvk.getP().equals(pbk.getP())) {
-			throw new RuntimeException();
-		}
-		if (!pvk.getQ().equals(pbk.getQ())) {
-			throw new RuntimeException();
-		}
-		if (!pvk.getG().equals(pbk.getG())) {
-			throw new RuntimeException();
-		}
-		prvKey = pvk;
-		pubKey = pbk;
-		length = pubKey.length;
+	    super(pvk, pbk);
+        if (!pvk.getP().equals(pbk.getP())
+                || !pvk.getQ().equals(pbk.getQ())
+                || !pvk.getG().equals(pbk.getG())) {
+            throw new IllegalArgumentException("Inconsistent keys");
+        }
 	}
 
-	/**
-	 * Compare deux pairs de cl�s.
-	 *
-	 * @param object la pair � comparer.
-	 * @return true si les deux pairs sont �gaux, false sinon.
-	 */
 	@Override
-	public boolean equals(final Object object) {
-		final KeyPair pair = (KeyPair) object;
-		return ((DSAPublicKey) pubKey).equals(pair.pubKey) && ((DSAPrivateKey) prvKey).equals(pair.prvKey);
-	}
+    @SuppressWarnings("PMD.UselessOverridingMethod")
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        return true;
+    }
 
 	/**
 	 * Retourne le param�tre G des cl�s.
@@ -60,7 +59,7 @@ public final class DSAKeyPair extends KeyPair {
 	 * @return G.
 	 */
 	public BigInteger getG() {
-		return ((DSAPublicKey) pubKey).getG();
+		return ((DSAPublicKey) getPublicKey()).getG();
 	}
 
 	/**
@@ -69,7 +68,7 @@ public final class DSAKeyPair extends KeyPair {
 	 * @return P.
 	 */
 	public BigInteger getP() {
-		return ((DSAPublicKey) pubKey).getP();
+		return ((DSAPublicKey) getPublicKey()).getP();
 	}
 
 	/**
@@ -78,7 +77,7 @@ public final class DSAKeyPair extends KeyPair {
 	 * @return Q.
 	 */
 	public BigInteger getQ() {
-		return ((DSAPublicKey) pubKey).getQ();
+		return ((DSAPublicKey) getPublicKey()).getQ();
 	}
 
 	/**
@@ -87,7 +86,7 @@ public final class DSAKeyPair extends KeyPair {
 	 * @return X.
 	 */
 	public BigInteger getX() {
-		return ((DSAPrivateKey) prvKey).getX();
+		return ((DSAPrivateKey) getPrivateKey()).getX();
 	}
 
 	/**
@@ -96,17 +95,7 @@ public final class DSAKeyPair extends KeyPair {
 	 * @return Y.
 	 */
 	public BigInteger getY() {
-		return ((DSAPublicKey) pubKey).getY();
-	}
-
-	/**
-	 * Retourne une valeur de hachage simple pour cette pair de cl�s.
-	 *
-	 * @return la valeur de hachage.
-	 */
-	@Override
-	public int hashCode() {
-		return pubKey.hashCode() * prvKey.hashCode();
+		return ((DSAPublicKey) getPublicKey()).getY();
 	}
 
 }

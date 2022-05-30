@@ -7,6 +7,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * S�lectionneur de fichier.
  *
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
+@SuppressFBWarnings("EI_EXPOSE_REP2")
 public final class FileListener implements ActionListener {
 
 	private final JFrame frame;

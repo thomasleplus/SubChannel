@@ -1,5 +1,7 @@
 package org.leplus.libcrypto;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Machine � Hachages Cryptographiques SHA-1.
  *
@@ -59,6 +61,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	 * @return le hachage.
 	 */
 	@Override
+	@SuppressFBWarnings("ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT")
 	protected Digest doDigest() {
 		final byte[] bytes = new byte[SHA1Digest.LENGTH];
 		for (int i = 0; i < SHA1Digest.LENGTH >>> 2; i++) {

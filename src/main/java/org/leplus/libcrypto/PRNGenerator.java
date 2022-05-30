@@ -293,7 +293,7 @@ public abstract class PRNGenerator {
 	 * @return l'entier court pseudo-al�atoire.
 	 */
 	public short getShort() {
-		return (short) ((getByte() << 8) + getByte());
+		return (short) ((getByte() << 8) + (getByte() & 0xff));
 	}
 
 }

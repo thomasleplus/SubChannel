@@ -1,6 +1,7 @@
 package org.leplus.libcrypto;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 /**
  * Signature Cryptographique DSA.
@@ -62,17 +63,17 @@ public final class DSASignature extends Signature {
 		return LENGTH;
 	}
 
-	/**
-	 * Compare deux signatures.
-	 *
-	 * @param object la signature � comparer.
-	 * @return true si les deux signatures sont �gales, false sinon.
-	 */
 	@Override
-	public boolean equals(final Object object) {
-		final DSASignature signature = (DSASignature) object;
-		return R.equals(signature.R) && S.equals(signature.S);
-	}
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DSASignature other = (DSASignature) obj;
+        return Objects.equals(R, other.R) && Objects.equals(S, other.S);
+    }
 
 	/**
 	 * Retourne le param�tre R de la signature.
@@ -92,14 +93,9 @@ public final class DSASignature extends Signature {
 		return S;
 	}
 
-	/**
-	 * Retourne une valeur de hachage simple pour cette signature.
-	 *
-	 * @return la valeur de hachage.
-	 */
 	@Override
-	public int hashCode() {
-		return R.hashCode() * S.hashCode();
-	}
+    public int hashCode() {
+        return Objects.hash(R, S);
+    }
 
 }

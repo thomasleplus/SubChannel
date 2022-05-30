@@ -1,5 +1,6 @@
 package org.leplus.libcrypto;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -20,7 +21,7 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	 * Construit le g�n�rateur pseudo-al�atoire.
 	 */
 	public JavaPRNGenerator() {
-		random = new Random();
+		random = new SecureRandom();
 	}
 
 	/**

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -19,6 +20,8 @@ import org.leplus.libcrypto.DSAPrivateKey;
 import org.leplus.libcrypto.DSASignature;
 import org.leplus.libcrypto.DSASignatureEngine;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Application de g�n�ration de signature.
  *
@@ -26,6 +29,7 @@ import org.leplus.libcrypto.DSASignatureEngine;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
+@SuppressFBWarnings({"OBJECT_DESERIALIZATION", "PATH_TRAVERSAL_IN"})
 public final class Sign implements ActionListener {
 
 	private final JFrame mainFrame;
@@ -92,9 +96,6 @@ public final class Sign implements ActionListener {
 			fileStream.close();
 			final DSASignature sg = (DSASignature) g.sign(pk);
 			final File sig = new File(sigField.getText());
-			if (!sig.exists()) {
-				sig.createNewFile();
-			}
 			final ObjectOutputStream sigStream = new ObjectOutputStream(new FileOutputStream(sig));
 			sigStream.writeObject(sg);
 			sigStream.close();
@@ -108,7 +109,7 @@ public final class Sign implements ActionListener {
 			msg.getContentPane().add(pnl);
 			msg.pack();
 			msg.show();
-		} catch (final Exception ex) {
+		} catch (final IOException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
 		mainFrame.dispose();
