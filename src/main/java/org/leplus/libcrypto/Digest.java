@@ -105,7 +105,7 @@ public abstract class Digest {
 	 */
 	public final int writeHex(final OutputStream output) throws IOException {
 		final String hex = getHex();
-		final PrintStream print = new PrintStream(output, true, StandardCharsets.UTF_8);
+		final PrintStream print = new PrintStream(output, true, StandardCharsets.UTF_8.name());
 		print.print(hex);
 		return hex.length();
 	}
@@ -119,7 +119,7 @@ public abstract class Digest {
 	 */
 	public final int writeInt(final OutputStream output) throws IOException {
 		final String dec = getInt().toString();
-		final PrintStream print = new PrintStream(output, true, StandardCharsets.UTF_8);
+		final PrintStream print = new PrintStream(output, true, StandardCharsets.UTF_8.name());
 		print.print(dec);
 		return dec.length();
 	}
