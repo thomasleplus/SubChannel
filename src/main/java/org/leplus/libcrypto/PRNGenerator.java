@@ -243,17 +243,7 @@ public abstract class PRNGenerator {
 	 * @return l'entier pseudo-al�atoire.
 	 */
 	public int getInt(final int min, final int max) {
-		if (min > max) {
-			throw new IndexOutOfBoundsException();
-		}
-		if (min == max) {
-			return min;
-		}
-		final int d = StrictMath.abs(max - min);
-		final int n1 = getInt();
-		final int n2 = getInt();
-		final int n3 = getInt();
-		return (n1 * n2 + n3) % d + min;
+		return getBigInt(BigInteger.valueOf(min), BigInteger.valueOf(max)).intValue();
 	}
 
 	/**
@@ -274,17 +264,7 @@ public abstract class PRNGenerator {
 	 * @return l'entier long pseudo-al�atoire.
 	 */
 	public long getLong(final long min, final long max) {
-		if (min > max) {
-			throw new IndexOutOfBoundsException();
-		}
-		if (min == max) {
-			return min;
-		}
-		final long d = StrictMath.abs(max - min);
-		final long n1 = getLong();
-		final long n2 = getLong();
-		final long n3 = getLong();
-		return (n1 * n2 + n3) % d + min;
+        return getBigInt(BigInteger.valueOf(min), BigInteger.valueOf(max)).longValue();
 	}
 
 	/**

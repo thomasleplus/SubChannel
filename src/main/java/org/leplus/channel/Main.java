@@ -29,7 +29,7 @@ public final class Main {
 		public void actionPerformed(final ActionEvent ae) {
 			try {
 				getClass();
-				Class.forName(windowClass).newInstance();
+				Class.forName(windowClass).getDeclaredConstructor().newInstance();
 			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}

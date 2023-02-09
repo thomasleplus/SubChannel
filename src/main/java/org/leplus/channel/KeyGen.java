@@ -3,7 +3,6 @@ package org.leplus.channel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -31,10 +30,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings("PATH_TRAVERSAL_IN")
 public final class KeyGen implements ActionListener {
 
-	private static final String[] sizes = { "1024", "960", "896", "832", "768", "704", "640", "576", "512" };
+	private static final Integer[] sizes = { 1024, 960, 896, 832, 768, 704, 640, 576, 512 };
 
 	private final JFrame mainFrame;
-	private final JComboBox sizeCombo;
+	private final JComboBox<Integer> sizeCombo;
 	private final JTextField pubField;
 	private final JTextField privField;
 
@@ -47,7 +46,7 @@ public final class KeyGen implements ActionListener {
 
 		final JPanel sizePanel = new JPanel();
 		final JLabel sizeLabel = new JLabel("Key Length: ");
-		sizeCombo = new JComboBox(sizes);
+		sizeCombo = new JComboBox<Integer>(sizes);
 		sizePanel.add(sizeLabel);
 		sizePanel.add(sizeCombo);
 		mainPanel.add(sizePanel);
@@ -82,36 +81,32 @@ public final class KeyGen implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(final ActionEvent ae) {
-		try {
-			final int size = (Integer.parseInt((String) sizeCombo.getSelectedItem()) - 512) / 64;
+	@SuppressFBWarnings("PATH_TRAVERSAL_OUT")
+	public void actionPerformed(final ActionEvent ae) throws NumberFormatException {
+		try (ObjectOutputStream pubStream = new ObjectOutputStream(new FileOutputStream(pubField.getText()));
+		        ObjectOutputStream privStream = new ObjectOutputStream(new FileOutputStream(privField.getText()))) {
+			final int size = ((Integer) sizeCombo.getSelectedItem() - 512) / 64;
 			final DSAKeyPairGenerator g = new DSAKeyPairGenerator(new JavaPRNGenerator(), size, 100);
 			final DSAKeyPair kp = (DSAKeyPair) g.generateKeyPair();
-			final File pubKey = new File(pubField.getText());
-			final ObjectOutputStream pubStream = new ObjectOutputStream(new FileOutputStream(pubKey));
 			pubStream.writeObject(kp.getPublicKey());
-			pubStream.close();
-			final File privKey = new File(privField.getText());
-			final ObjectOutputStream privStream = new ObjectOutputStream(new FileOutputStream(privKey));
 			privStream.writeObject(kp.getPrivateKey());
-			privStream.close();
-			final JFrame msgFrame = new JFrame("Summary");
-			final JPanel msgPanel = new JPanel();
-			String info = "<html><b>Information about the keys:</b><br><br>";
-			info += "P = " + split(kp.getP().toString());
-			info += "Q = " + split(kp.getQ().toString());
-			info += "G = " + split(kp.getG().toString());
-			info += "X = " + split(kp.getX().toString());
-			info += "Y = " + split(kp.getY().toString());
-			info += "</html>";
-			msgPanel.add(new JLabel(info));
-			msgFrame.getContentPane().add(msgPanel);
-			msgFrame.pack();
-			msgFrame.setVisible(true);
+	        final JFrame msgFrame = new JFrame("Summary");
+	        final JPanel msgPanel = new JPanel();
+	        String info = "<html><b>Information about the keys:</b><br><br>";
+	        info += "P = " + split(kp.getP().toString());
+	        info += "Q = " + split(kp.getQ().toString());
+	        info += "G = " + split(kp.getG().toString());
+	        info += "X = " + split(kp.getX().toString());
+	        info += "Y = " + split(kp.getY().toString());
+	        info += "</html>";
+	        msgPanel.add(new JLabel(info));
+	        msgFrame.getContentPane().add(msgPanel);
+	        msgFrame.pack();
+	        msgFrame.setVisible(true);
+	        mainFrame.dispose();
 		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
-		mainFrame.dispose();
 	}
 
 	private String split(final String string) {
