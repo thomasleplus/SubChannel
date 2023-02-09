@@ -3,7 +3,6 @@ package org.leplus.channel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,7 +28,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-@SuppressFBWarnings({"OBJECT_DESERIALIZATION", "PATH_TRAVERSAL_IN"})
 public final class Sign implements ActionListener {
 
 	private final JFrame mainFrame;
@@ -83,22 +81,16 @@ public final class Sign implements ActionListener {
 	}
 
 	@Override
+	@SuppressFBWarnings({"OBJECT_DESERIALIZATION", "PATH_TRAVERSAL_IN", "PATH_TRAVERSAL_OUT"})
 	public void actionPerformed(final ActionEvent ae) {
-		try {
-			final File privKey = new File(privField.getText());
-			final ObjectInputStream privStream = new ObjectInputStream(new FileInputStream(privKey));
+        try (ObjectInputStream privStream = new ObjectInputStream(new FileInputStream(privField.getText()));
+                FileInputStream fileStream = new FileInputStream(fileField.getText());
+                ObjectOutputStream sigStream = new ObjectOutputStream(new FileOutputStream(sigField.getText()))) {
 			final DSAPrivateKey pk = (DSAPrivateKey) privStream.readObject();
-			privStream.close();
 			final DSASignatureEngine g = new DSASignatureEngine(new BiasedPRNGenerator(pk.getX()));
-			final File file = new File(fileField.getText());
-			final FileInputStream fileStream = new FileInputStream(file);
 			g.update(fileStream);
-			fileStream.close();
 			final DSASignature sg = (DSASignature) g.sign(pk);
-			final File sig = new File(sigField.getText());
-			final ObjectOutputStream sigStream = new ObjectOutputStream(new FileOutputStream(sig));
 			sigStream.writeObject(sg);
-			sigStream.close();
 			final JFrame msg = new JFrame("Summary");
 			final JPanel pnl = new JPanel();
 			String info = "<html><b>Information about signature:</b><br><br>";

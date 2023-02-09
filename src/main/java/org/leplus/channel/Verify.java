@@ -3,7 +3,6 @@ package org.leplus.channel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +29,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-@SuppressFBWarnings({"OBJECT_DESERIALIZATION", "PATH_TRAVERSAL_IN"})
 public final class Verify implements ActionListener {
 
 	private final JFrame mainFrame;
@@ -84,30 +82,22 @@ public final class Verify implements ActionListener {
 	}
 
 	@Override
+	@SuppressFBWarnings({"OBJECT_DESERIALIZATION", "PATH_TRAVERSAL_IN"})
 	public void actionPerformed(final ActionEvent ae) {
-		try {
-			final File pubKey = new File(pubField.getText());
-			final ObjectInputStream pubStream = new ObjectInputStream(new FileInputStream(pubKey));
+        try (ObjectInputStream pubStream = new ObjectInputStream(new FileInputStream(pubField.getText()));
+                FileInputStream fileStream = new FileInputStream(fileField.getText());
+                ObjectInputStream sigStream = new ObjectInputStream(new FileInputStream(sigField.getText()))) {
 			final DSAPublicKey pk = (DSAPublicKey) pubStream.readObject();
-			pubStream.close();
 			final DSASignatureEngine g = new DSASignatureEngine(new JavaPRNGenerator());
-			final File file = new File(fileField.getText());
-			FileInputStream fileStream = new FileInputStream(file);
 			g.update(fileStream);
-			fileStream.close();
 			final SHA1DigestEngine d = new SHA1DigestEngine();
-			final File sigKey = new File(sigField.getText());
-			final ObjectInputStream sigStream = new ObjectInputStream(new FileInputStream(sigKey));
 			final DSASignature sig = (DSASignature) sigStream.readObject();
-			sigStream.close();
 			final boolean b = g.verify(pk, sig);
 			final JFrame msg = new JFrame("Summary");
 			final JPanel pnl = new JPanel();
 			String info;
 			if (b) {
-				fileStream = new FileInputStream(file);
 				d.update(fileStream);
-				fileStream.close();
 				info = "<html><b>Valid signature.</b><br><br><b>Private key in subliminal channel:</b><br><br>";
 				final BigInteger X = d.digest().getInt().multiply(sig.getS().subtract(pk.getY()).modInverse(pk.getQ()))
 						.mod(pk.getQ());
