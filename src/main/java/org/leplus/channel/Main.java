@@ -61,7 +61,7 @@ public final class Main {
 		mainFrame.getContentPane().add(mainPanel);
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		mainFrame.pack();
-		mainFrame.show();
+		mainFrame.setVisible(true);
 
 	}
 

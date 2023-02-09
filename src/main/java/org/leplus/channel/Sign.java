@@ -79,7 +79,7 @@ public final class Sign implements ActionListener {
 
 		mainFrame.getContentPane().add(mainPanel);
 		mainFrame.pack();
-		mainFrame.show();
+		mainFrame.setVisible(true);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public final class Sign implements ActionListener {
 			pnl.add(new JLabel(info));
 			msg.getContentPane().add(pnl);
 			msg.pack();
-			msg.show();
+			msg.setVisible(true);
 		} catch (final IOException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}

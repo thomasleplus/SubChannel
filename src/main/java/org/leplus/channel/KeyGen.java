@@ -78,7 +78,7 @@ public final class KeyGen implements ActionListener {
 
 		mainFrame.getContentPane().add(mainPanel);
 		mainFrame.pack();
-		mainFrame.show();
+		mainFrame.setVisible(true);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public final class KeyGen implements ActionListener {
 			msgPanel.add(new JLabel(info));
 			msgFrame.getContentPane().add(msgPanel);
 			msgFrame.pack();
-			msgFrame.show();
+			msgFrame.setVisible(true);
 		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
