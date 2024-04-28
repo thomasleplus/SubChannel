@@ -99,7 +99,7 @@ public final class DSAKeyPairGenerator extends KeyPairGenerator {
 		BigInteger g;
 		do {
 			g = random.getBigInt(two, p.subtract(two)).modPow(p.subtract(BigInteger.ONE).divide(q),
-					p); /* FIXME: Why is g a generator ? */
+					p); /* @TL FIXME: Why is g a generator ? */
 		} while (g.compareTo(BigInteger.ONE) == 0);
 		final BigInteger x = random.getBigInt(BigInteger.ONE, q.subtract(BigInteger.ONE));
 		final BigInteger y = g.modPow(x, p);
