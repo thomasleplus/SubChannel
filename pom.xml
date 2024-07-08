@@ -64,7 +64,7 @@
     <java.version>1.8</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <dependencyCheck.version>10.0.1</dependencyCheck.version>
+    <dependencyCheck.version>10.0.2</dependencyCheck.version>
     <dependencyCheck.skip>false</dependencyCheck.skip>
     <dependencyCheck.threshold>7</dependencyCheck.threshold>
   </properties>
@@ -195,7 +195,7 @@
       <plugin>
 	<groupId>com.github.spotbugs</groupId>
 	<artifactId>spotbugs-maven-plugin</artifactId>
-	<version>4.8.6.1</version>
+	<version>4.8.6.2</version>
         <configuration>
           <plugins>
             <plugin>
