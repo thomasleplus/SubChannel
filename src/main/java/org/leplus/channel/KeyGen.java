@@ -27,7 +27,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author Thomas Leplus
  *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
-@SuppressFBWarnings("PATH_TRAVERSAL_IN")
 public final class KeyGen implements ActionListener {
 
 	private static final Integer[] sizes = { 1024, 960, 896, 832, 768, 704, 640, 576, 512 };
