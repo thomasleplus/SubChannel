@@ -22,10 +22,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Application de g�n�ration de cl�.
- *
- * @version $Revision: 1.4 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class KeyGen implements ActionListener {
 

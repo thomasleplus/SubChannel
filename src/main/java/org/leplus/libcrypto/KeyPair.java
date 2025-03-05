@@ -4,10 +4,6 @@ import java.util.Objects;
 
 /**
  * Pair Cl� Priv�e / Cl� Publique.
- *
- * @version $Revision: 1.3 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class KeyPair extends Key {
 

@@ -5,10 +5,6 @@ import java.io.InputStream;
 
 /**
  * Machine � Hachages Cryptographiques.
- *
- * @version $Revision: 1.4 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class DigestEngine {
 

@@ -9,10 +9,6 @@ import java.util.Arrays;
 
 /**
  * Hachage Cryptographique.
- *
- * @version $Revision: 1.5 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class Digest {
 

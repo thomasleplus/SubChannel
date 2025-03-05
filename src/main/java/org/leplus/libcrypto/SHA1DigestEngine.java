@@ -8,10 +8,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * Le <i>Secure Hash Algorithm</i> est d�fini par la norme <a href=
  * "http://www.csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf">FIPS
  * 180-2</a> (<i>Secure Hash Standard</i>) du NIST.
- *
- * @version $Revision: 1.4 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class SHA1DigestEngine extends DigestEngine {
 

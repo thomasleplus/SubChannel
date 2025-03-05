@@ -10,10 +10,6 @@ import javax.swing.WindowConstants;
 
 /**
  * Classe principale de l'application.
- *
- * @version $Revision: 1.4 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class Main {
 

@@ -4,10 +4,6 @@ import java.math.BigInteger;
 
 /**
  * G�n�rateur de Nombres Pseudo-Al�atoires.
- *
- * @version $Revision: 1.6 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class PRNGenerator {
 

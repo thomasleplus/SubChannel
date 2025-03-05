@@ -6,10 +6,6 @@ import org.leplus.libcrypto.PRNGenerator;
 
 /**
  * G�n�rateur de Nombres Pseudo-Al�atoires bias�.
- *
- * @version $Revision: 1.3 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class BiasedPRNGenerator extends PRNGenerator {
 

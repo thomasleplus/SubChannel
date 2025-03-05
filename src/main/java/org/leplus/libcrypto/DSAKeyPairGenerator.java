@@ -9,10 +9,6 @@ import java.security.InvalidParameterException;
  * Le <i>Digital Signature Algorithm</i> est d�fini par la norme <a href=
  * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
  * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
- *
- * @version $Revision: 1.7 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class DSAKeyPairGenerator extends KeyPairGenerator {
 

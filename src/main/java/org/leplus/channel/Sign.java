@@ -23,10 +23,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Application de g�n�ration de signature.
- *
- * @version $Revision: 1.3 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class Sign implements ActionListener {
 

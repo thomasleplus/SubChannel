@@ -5,10 +5,6 @@ import java.io.InputStream;
 
 /**
  * Machine � Signatures.
- *
- * @version $Revision: 1.3 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public abstract class SignatureEngine {
 

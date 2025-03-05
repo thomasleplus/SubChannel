@@ -5,10 +5,6 @@ import java.util.Random;
 
 /**
  * G�n�rateur de Nombres Pseudo-Al�atoires fournit par SUN Microsystem.
- *
- * @version $Revision: 1.4 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 public final class JavaPRNGenerator extends PRNGenerator {
 

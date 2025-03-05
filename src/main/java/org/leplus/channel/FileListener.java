@@ -11,10 +11,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * S�lectionneur de fichier.
- *
- * @version $Revision: 1.3 $
- * @author Thomas Leplus
- *         &lt;<a href="mailto:thomas@leplus.org">thomas@leplus.org</a>&gt;
  */
 @SuppressFBWarnings("EI_EXPOSE_REP2")
 public final class FileListener implements ActionListener {
