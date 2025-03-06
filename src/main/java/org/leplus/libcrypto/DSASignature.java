@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Signature Cryptographique DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est d�fini par la norme <a href=
+ * Le <i>Digital Signature Algorithm</i> est défini par la norme <a href=
  * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
  * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  */
@@ -23,25 +23,25 @@ public final class DSASignature extends Signature {
 	public static final int LENGTH = 20;
 
 	/**
-	 * La longueur en octets des signatures DSA encod�es.
+	 * La longueur en octets des signatures DSA encodées.
 	 */
 	public static final int ENCODED_LENGTH = 46;
 
 	/**
-	 * Le param�tre r.
+	 * Le paramêtre r.
 	 */
 	private final BigInteger R;
 
 	/**
-	 * Le param�tre s.
+	 * Le paramêtre s.
 	 */
 	private final BigInteger S;
 
 	/**
-	 * Construit une signature DSA � partir de ses param�tres.
+	 * Construit une signature DSA à partir de ses paramêtres.
 	 *
-	 * @param r le param�tre r.
-	 * @param s le param�tre s.
+	 * @param r le paramêtre r.
+	 * @param s le paramêtre s.
 	 */
 	protected DSASignature(final BigInteger r, final BigInteger s) {
 		R = r;
@@ -72,18 +72,18 @@ public final class DSASignature extends Signature {
     }
 
 	/**
-	 * Retourne le param�tre R de la signature.
+	 * Retourne le paramêtre R de la signature.
 	 *
-	 * @return le param�tre R.
+	 * @return le paramêtre R.
 	 */
 	public BigInteger getR() {
 		return R;
 	}
 
 	/**
-	 * Retourne le param�tre S de la signature.
+	 * Retourne le paramêtre S de la signature.
 	 *
-	 * @return le param�tre S.
+	 * @return le paramêtre S.
 	 */
 	public BigInteger getS() {
 		return S;

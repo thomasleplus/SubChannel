@@ -21,7 +21,7 @@ import org.leplus.libcrypto.JavaPRNGenerator;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
- * Application de g�n�ration de cl�.
+ * Application de génération de clé.
  */
 public final class KeyGen implements ActionListener {
 

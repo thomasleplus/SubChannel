@@ -41,9 +41,9 @@ public abstract class Digest {
 	}
 
 	/**
-	 * Retourne la repr�sentation h�xad�cimal du hachage.
+	 * Retourne la représentation héxadécimal du hachage.
 	 *
-	 * @return la cha�ne de caract�re.
+	 * @return la chaîne de caractère.
 	 */
 	public final String getHex() {
 		String s = getInt().toString(16);
@@ -80,11 +80,11 @@ public abstract class Digest {
     }
 
 	/**
-	 * �crit les octets du hachage sur le flot.
+	 * écrit les octets du hachage sur le flot.
 	 *
 	 * @param output le flot de sortie.
-	 * @return le nombre d'octets �crits.
-	 * @throws IOException si une erreure se produit lors de l'�criture sur le flot.
+	 * @return le nombre d'octets écrits.
+	 * @throws IOException si une erreure se produit lors de l'écriture sur le flot.
 	 */
 	public final int writeBytes(final OutputStream output) throws IOException {
 		final byte[] bytes = getBytes();
@@ -93,11 +93,11 @@ public abstract class Digest {
 	}
 
 	/**
-	 * �crit la repr�sentation h�xad�cimale du hachage sur le flot.
+	 * écrit la représentation héxadécimale du hachage sur le flot.
 	 *
 	 * @param output le flot de sortie.
-	 * @return le nombre de caract�res �crits.
-	 * @throws IOException si une erreure se produit lors de l'�criture sur le flot.
+	 * @return le nombre de caractères écrits.
+	 * @throws IOException si une erreure se produit lors de l'écriture sur le flot.
 	 */
 	public final int writeHex(final OutputStream output) throws IOException {
 		final String hex = getHex();
@@ -107,11 +107,11 @@ public abstract class Digest {
 	}
 
 	/**
-	 * �crit la repr�sentation d�cimale du hachage sur le flot.
+	 * écrit la représentation décimale du hachage sur le flot.
 	 *
 	 * @param output le flot de sortie.
-	 * @return le nombre de caract�res �crits.
-	 * @throws IOException si une erreure se produit lors de l'�criture sur le flot.
+	 * @return le nombre de caractères écrits.
+	 * @throws IOException si une erreure se produit lors de l'écriture sur le flot.
 	 */
 	public final int writeInt(final OutputStream output) throws IOException {
 		final String dec = getInt().toString();

@@ -1,7 +1,7 @@
 package org.leplus.libcrypto;
 
 /**
- * Cl� Priv�e.
+ * Clé Privée.
  */
 public abstract class PrivateKey extends Key {
 

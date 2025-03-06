@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Machine � Hachages Cryptographiques.
+ * Machine à Hachages Cryptographiques.
  */
 public abstract class DigestEngine {
 
 	/**
-	 * La taille du buffer utilis� ( en octets).
+	 * La taille du buffer utilisé ( en octets).
 	 */
 	public static final int BUFFER_SIZE = 1024;
 
 	/**
-	 * G�n�re le hachage des octets lus jusqu'� pr�sent et remet la machine dans son
-	 * �tat initial.
+	 * Génère le hachage des octets lus jusqu'à présent et remet la machine dans son
+	 * état initial.
 	 *
 	 * @return le hachage.
 	 */
@@ -27,33 +27,33 @@ public abstract class DigestEngine {
 	}
 
 	/**
-	 * G�n�re le hachage des octets lus jusqu'� pr�sent.
+	 * Génère le hachage des octets lus jusqu'à présent.
 	 *
 	 * @return le hachage.
 	 */
 	protected abstract Digest doDigest();
 
 	/**
-	 * G�n�re le padding avant la finalisation du hachage.
+	 * Génère le padding avant la finalisation du hachage.
 	 *
-	 * @return le nombre d'octets n�cessaires au padding.
+	 * @return le nombre d'octets nécessaires au padding.
 	 */
 	protected abstract int doPadding();
 
 	/**
-	 * Remet la machine dans son �tat initial.
+	 * Remet la machine dans son état initial.
 	 */
 	protected abstract void doReset();
 
 	/**
 	 * Lit un octet.
 	 *
-	 * @param n l'octet � hacher.
+	 * @param n l'octet à hacher.
 	 */
 	protected abstract void doUpdate(byte n);
 
 	/**
-	 * Remet la machine dans son �tat initial.
+	 * Remet la machine dans son état initial.
 	 */
 	public final void reset() {
 		doReset();
@@ -62,7 +62,7 @@ public abstract class DigestEngine {
 	/**
 	 * Lit un octet.
 	 *
-	 * @param n l'octet � hacher.
+	 * @param n l'octet à hacher.
 	 */
 	public final void update(final byte n) {
 		doUpdate(n);
@@ -79,12 +79,12 @@ public abstract class DigestEngine {
 	}
 
 	/**
-	 * Lit au plus le nombre donn� d'octets du tableau en commen�ant � l'indice
-	 * donn�.
+	 * Lit au plus le nombre donné d'octets du tableau en commençant à l'indice
+	 * donné.
 	 *
 	 * @param bytes  le tableau d'octets.
-	 * @param offset l'indice de d�part.
-	 * @param length le nombre d'octets � lire.
+	 * @param offset l'indice de départ.
+	 * @param length le nombre d'octets à lire.
 	 * @return le nombre d'octets lus.
 	 */
 	public final int update(final byte[] bytes, final int offset, final int length) {
@@ -95,9 +95,9 @@ public abstract class DigestEngine {
 	}
 
 	/**
-	 * Lit les octets sur le flot jusqu'� sa fin.
+	 * Lit les octets sur le flot jusqu'à sa fin.
 	 *
-	 * @param input le flot d'entr�e.
+	 * @param input le flot d'entrée.
 	 * @return le nombre d'octets lus.
 	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
@@ -112,10 +112,10 @@ public abstract class DigestEngine {
 	}
 
 	/**
-	 * Lit au plus le nombre donn� d'octets sur le flot.
+	 * Lit au plus le nombre donné d'octets sur le flot.
 	 *
-	 * @param input  le flot d'entr�e.
-	 * @param length le nombre d'octets � lire.
+	 * @param input  le flot d'entrée.
+	 * @param length le nombre d'octets à lire.
 	 * @return le nombre d'octets lus.
 	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */

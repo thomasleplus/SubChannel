@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
- * S�lectionneur de fichier.
+ * Sélectionneur de fichier.
  */
 @SuppressFBWarnings("EI_EXPOSE_REP2")
 public final class FileListener implements ActionListener {

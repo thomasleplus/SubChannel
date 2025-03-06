@@ -3,7 +3,7 @@ package org.leplus.libcrypto;
 import java.util.Objects;
 
 /**
- * Pair Cl� Priv�e / Cl� Publique.
+ * Pair Clé Privée / Clé Publique.
  */
 public abstract class KeyPair extends Key {
 
@@ -13,28 +13,28 @@ public abstract class KeyPair extends Key {
 	private static final long serialVersionUID = 9054280212735531426L;
 
 	/**
-	 * La cl� priv�e.
+	 * La clé privée.
 	 */
 	private final PrivateKey prvKey;
 
 	/**
-	 * La cl� publique.
+	 * La clé publique.
 	 */
 	private final PublicKey pubKey;
 
 	/**
-	 * Retourne la cl� priv�e.
+	 * Retourne la clé privée.
 	 *
-	 * @return la cl� priv�e.
+	 * @return la clé privée.
 	 */
 	public final PrivateKey getPrivateKey() {
 		return prvKey;
 	}
 
 	/**
-	 * Retourne la cl� publique.
+	 * Retourne la clé publique.
 	 *
-	 * @return la cl� publique.
+	 * @return la clé publique.
 	 */
 	public final PublicKey getPublicKey() {
 		return pubKey;

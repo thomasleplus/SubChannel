@@ -22,7 +22,7 @@ import org.leplus.libcrypto.DSASignatureEngine;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
- * Application de g�n�ration de signature.
+ * Application de génération de signature.
  */
 public final class Sign implements ActionListener {
 

@@ -1,37 +1,37 @@
 package org.leplus.libcrypto;
 
 /**
- * G�n�rateur de Pair de Cl�s Cryptographiques.
+ * Générateur de Pair de Clés Cryptographiques.
  */
 public abstract class KeyPairGenerator {
 
 	/**
-	 * G�n�re une nouvelle pair de cl�s.
+	 * Génère une nouvelle pair de clés.
 	 *
-	 * @return la pair de cl�s.
+	 * @return la pair de clés.
 	 */
 	protected abstract KeyPair doGenerateKeyPair();
 
 	/**
-	 * Retourne la longueur des cl�s g�n�r�es (en octets).
+	 * Retourne la longueur des clés générées (en octets).
 	 *
-	 * @return la longueur des cl�s (en octets).
+	 * @return la longueur des clés (en octets).
 	 */
 	protected abstract int doGetLength();
 
 	/**
-	 * G�n�re une nouvelle pair de cl�s.
+	 * Génère une nouvelle pair de clés.
 	 *
-	 * @return la pair de cl�s.
+	 * @return la pair de clés.
 	 */
 	public final KeyPair generateKeyPair() {
 		return doGenerateKeyPair();
 	}
 
 	/**
-	 * Retourne la longueur des cl�s g�n�r�es (en octets).
+	 * Retourne la longueur des clés générées (en octets).
 	 *
-	 * @return la longueur des cl�s (en octets).
+	 * @return la longueur des clés (en octets).
 	 */
 	public final int getLength() {
 		return doGetLength();

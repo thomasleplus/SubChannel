@@ -4,9 +4,9 @@ import java.math.BigInteger;
 import java.util.Objects;
 
 /**
- * Cl� Priv�e DSA.
+ * Clé Privée DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est d�fini par la norme <a href=
+ * Le <i>Digital Signature Algorithm</i> est défini par la norme <a href=
  * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
  * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  */
@@ -18,32 +18,32 @@ public final class DSAPrivateKey extends PrivateKey {
 	private static final long serialVersionUID = -6744540637294417567L;
 
 	/**
-	 * Le param�tre p.
+	 * Le paramêtre p.
 	 */
 	private final BigInteger P;
 
 	/**
-	 * Le param�tre q.
+	 * Le paramêtre q.
 	 */
 	private final BigInteger Q;
 
 	/**
-	 * Le param�tre g.
+	 * Le paramêtre g.
 	 */
 	private final BigInteger G;
 
 	/**
-	 * Le param�tre x.
+	 * Le paramêtre x.
 	 */
 	private final BigInteger X;
 
 	/**
-	 * Construit une cl� priv�e DSA � partir de ses param�tres.
+	 * Construit une clé privée DSA à partir de ses paramêtres.
 	 *
-	 * @param p le param�tre p.
-	 * @param q le param�tre q.
-	 * @param g le param�tre g.
-	 * @param x le param�tre x.
+	 * @param p le paramêtre p.
+	 * @param q le paramêtre q.
+	 * @param g le paramêtre g.
+	 * @param x le paramêtre x.
 	 */
 	protected DSAPrivateKey(final BigInteger p, final BigInteger q, final BigInteger g, final BigInteger x) {
         super((int) StrictMath.ceil((double) p.bitLength() / 128) * 16);
@@ -67,36 +67,36 @@ public final class DSAPrivateKey extends PrivateKey {
     }
 
 	/**
-	 * Retourne le param�tre g.
+	 * Retourne le paramêtre g.
 	 *
-	 * @return le param�tre g.
+	 * @return le paramêtre g.
 	 */
 	public BigInteger getG() {
 		return G;
 	}
 
 	/**
-	 * Retourne le param�tre p.
+	 * Retourne le paramêtre p.
 	 *
-	 * @return le param�tre p.
+	 * @return le paramêtre p.
 	 */
 	public BigInteger getP() {
 		return P;
 	}
 
 	/**
-	 * Retourne le param�tre q.
+	 * Retourne le paramêtre q.
 	 *
-	 * @return le param�tre q.
+	 * @return le paramêtre q.
 	 */
 	public BigInteger getQ() {
 		return Q;
 	}
 
 	/**
-	 * Retourne le param�tre x.
+	 * Retourne le paramêtre x.
 	 *
-	 * @return le param�tre x.
+	 * @return le paramêtre x.
 	 */
 	public BigInteger getX() {
 		return X;

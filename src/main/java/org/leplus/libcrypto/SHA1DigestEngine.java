@@ -3,9 +3,9 @@ package org.leplus.libcrypto;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
- * Machine � Hachages Cryptographiques SHA-1.
+ * Machine à Hachages Cryptographiques SHA-1.
  *
- * Le <i>Secure Hash Algorithm</i> est d�fini par la norme <a href=
+ * Le <i>Secure Hash Algorithm</i> est défini par la norme <a href=
  * "http://www.csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf">FIPS
  * 180-2</a> (<i>Secure Hash Standard</i>) du NIST.
  */
@@ -17,7 +17,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	public static final int BLOCK_LENGTH = 64;
 
 	/**
-	 * Le nombre de bits d�j� lus.
+	 * Le nombre de bits déjà lus.
 	 */
 	private long counter;
 
@@ -37,7 +37,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	private final int[] context;
 
 	/**
-	 * Tableau utilis� pour les calculs.
+	 * Tableau utilisé pour les calculs.
 	 */
 	private final int[] W;
 
@@ -52,7 +52,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	}
 
 	/**
-	 * G�n�re le hachage des octets lus jusqu'� pr�sent.
+	 * Génère le hachage des octets lus jusqu'à présent.
 	 *
 	 * @return le hachage.
 	 */
@@ -70,7 +70,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	}
 
 	/**
-	 * Retourne la taille des blocs utilis�s lors du hachage (en octets).
+	 * Retourne la taille des blocs utilisés lors du hachage (en octets).
 	 */
 	protected int doGetBlockSize() {
 		return BLOCK_LENGTH;
@@ -100,7 +100,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	}
 
 	/**
-	 * Remet la machine dans son �tat initial.
+	 * Remet la machine dans son état initial.
 	 */
 	@Override
 	protected void doReset() {
@@ -116,7 +116,7 @@ public final class SHA1DigestEngine extends DigestEngine {
 	/**
 	 * Lit un octet.
 	 *
-	 * @param n l'octet � hacher.
+	 * @param n l'octet à hacher.
 	 */
 	@Override
 	protected void doUpdate(final byte n) {

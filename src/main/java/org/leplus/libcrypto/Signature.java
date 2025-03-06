@@ -26,8 +26,8 @@ public abstract class Signature implements Serializable {
 	/**
 	 * Compare deux signatures.
 	 *
-	 * @param object la signature � comparer.
-	 * @return true si les deux signatures sont �gales, false sinon.
+	 * @param object la signature à comparer.
+	 * @return true si les deux signatures sont égales, false sinon.
 	 */
 	@Override
 	public abstract boolean equals(Object object);

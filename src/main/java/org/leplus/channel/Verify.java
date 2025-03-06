@@ -23,7 +23,7 @@ import org.leplus.libcrypto.SHA1DigestEngine;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
- * Application de v�rification de signature.
+ * Application de vérification de signature.
  */
 public final class Verify implements ActionListener {
 

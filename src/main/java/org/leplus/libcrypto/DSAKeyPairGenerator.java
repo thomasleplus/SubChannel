@@ -4,9 +4,9 @@ import java.math.BigInteger;
 import java.security.InvalidParameterException;
 
 /**
- * G�n�rateur de Pair de Cl�s Cryptographiques DSA.
+ * Générateur de Pair de Clés Cryptographiques DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est d�fini par la norme <a href=
+ * Le <i>Digital Signature Algorithm</i> est défini par la norme <a href=
  * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
  * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  */
@@ -18,31 +18,31 @@ public final class DSAKeyPairGenerator extends KeyPairGenerator {
 	private static final BigInteger two = BigInteger.valueOf(2);
 
 	/**
-	 * Pour un Q choisit al�atoirement, LIMIT est le nombre de tentatives pour
+	 * Pour un Q choisit aléatoirement, LIMIT est le nombre de tentatives pour
 	 * trouver P tel que Q divise P-1 avant de changer de Q.
 	 */
 	private static final int LIMIT = 4096;
 
 	/**
-	 * La longueur des cl�s g�n�r�es (en octets).
+	 * La longueur des clés générées (en octets).
 	 */
 	private final int length;
 
 	/**
-	 * La certitude du teste de primalit� .
+	 * La certitude du teste de primalité .
 	 */
 	private final int certainty;
 
 	/**
-	 * Le g�n�rateur de nombres al�atoires.
+	 * Le générateur de nombres aléatoires.
 	 */
 	private final PRNGenerator random;
 
 	/**
-	 * Construit un g�n�rateur de pairs de cl�s DSA de 1024 bits (avec une certitude
-	 * de primalit� � 100).
+	 * Construit un générateur de pairs de clés DSA de 1024 bits (avec une certitude
+	 * de primalité à 100).
 	 *
-	 * @param prng le g�n�rateur de nombres pseudo-al�atoires � utiliser.
+	 * @param prng le générateur de nombres pseudo-aléatoires à utiliser.
 	 */
 	public DSAKeyPairGenerator(final PRNGenerator prng) throws InvalidParameterException {
 		random = prng;
@@ -51,16 +51,16 @@ public final class DSAKeyPairGenerator extends KeyPairGenerator {
 	}
 
 	/**
-	 * Construit un g�n�rateur de pairs de cl�s DSA.
+	 * Construit un générateur de pairs de clés DSA.
 	 *
-	 * @param prng le g�n�rateur de nombres pseudo-al�atoires � utiliser.
-	 * @param t    le param�tre de s�curit� T compris entre 0 et 8 (la taille des
-	 *             cl�s sera 512+64T bits). <b>T > 3 est fortement recommend� depuis
+	 * @param prng le générateur de nombres pseudo-aléatoires à utiliser.
+	 * @param t    le paramêtre de sécurité T compris entre 0 et 8 (la taille des
+	 *             clés sera 512+64T bits). <b>T > 3 est fortement recommendé depuis
 	 *             1996.</b>
-	 * @param c    la certitude voulu sur la primalit� des entiers g�n�r�s: les
-	 *             entiers sont premiers avec une probabilit� p =
+	 * @param c    la certitude voulu sur la primalité des entiers générés: les
+	 *             entiers sont premiers avec une probabilité p =
 	 *             (1-1/2<sup>c</sup>).
-	 * @throws InvalidParameterException si t est inf�rieur � 0 ou sup�rieur � 8.
+	 * @throws InvalidParameterException si t est inférieur à 0 ou supérieur à 8.
 	 */
 	public DSAKeyPairGenerator(final PRNGenerator prng, final int t, final int c) throws InvalidParameterException {
 		if (t < 0 || t > 8) {
@@ -72,9 +72,9 @@ public final class DSAKeyPairGenerator extends KeyPairGenerator {
 	}
 
 	/**
-	 * G�n�re une nouvelle pair de cl�s.
+	 * Génère une nouvelle pair de clés.
 	 *
-	 * @return la pair de cl�s.
+	 * @return la pair de clés.
 	 */
 	@Override
 	protected KeyPair doGenerateKeyPair() {
@@ -105,9 +105,9 @@ public final class DSAKeyPairGenerator extends KeyPairGenerator {
 	}
 
 	/**
-	 * Retourne la longueur en octets des cl�s g�n�r�es (en octets).
+	 * Retourne la longueur en octets des clés générées (en octets).
 	 *
-	 * @return la longueur des cl�s (en octets).
+	 * @return la longueur des clés (en octets).
 	 */
 	@Override
 	protected int doGetLength() {

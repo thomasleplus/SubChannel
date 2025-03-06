@@ -3,7 +3,7 @@ package org.leplus.libcrypto;
 /**
  * Hachage Cryptographique SHA-1.
  *
- * Le <i>Secure Hash Algorithm</i> est d�fini par la norme <a href=
+ * Le <i>Secure Hash Algorithm</i> est défini par la norme <a href=
  * "http://www.csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf">FIPS
  * 180-2</a> (<i>Secure Hash Standard</i>) du NIST.
  */

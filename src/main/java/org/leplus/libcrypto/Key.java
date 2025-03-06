@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Cl� Cryptographique.
+ * Clé Cryptographique.
  */
 public abstract class Key implements Serializable {
 
@@ -14,14 +14,14 @@ public abstract class Key implements Serializable {
 	private static final long serialVersionUID = -430859166740079170L;
 	
 	/**
-	 * La longueur de la cl� (en octets).
+	 * La longueur de la clé (en octets).
 	 */
 	private final int length;
 
 	/**
-	 * Retourne la longueur de la cl� (en octets).
+	 * Retourne la longueur de la clé (en octets).
 	 *
-	 * @return la longueur de la cl� (en octets).
+	 * @return la longueur de la clé (en octets).
 	 */
 	public final int getLength() {
 		return length;

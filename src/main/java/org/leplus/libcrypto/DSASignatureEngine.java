@@ -3,23 +3,23 @@ package org.leplus.libcrypto;
 import java.math.BigInteger;
 
 /**
- * Machine � Signatures DSA.
+ * Machine à Signatures DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est d�fini par la norme <a href=
+ * Le <i>Digital Signature Algorithm</i> est défini par la norme <a href=
  * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
  * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  */
 public final class DSASignatureEngine extends SignatureEngine {
 
 	/**
-	 * Le g�n�rateur de nombres pseudo-al�atoires.
+	 * Le générateur de nombres pseudo-aléatoires.
 	 */
 	private final PRNGenerator random;
 
 	/**
-	 * Construit une machine � signatures DSA.
+	 * Construit une machine à signatures DSA.
 	 *
-	 * @param prng le g�n�rateur de nombres pseudo-al�atoires utilis� par la machine
+	 * @param prng le générateur de nombres pseudo-aléatoires utilisé par la machine
 	 *             de signatures DSA.
 	 */
 	public DSASignatureEngine(final PRNGenerator prng) {
@@ -28,10 +28,10 @@ public final class DSASignatureEngine extends SignatureEngine {
 	}
 
 	/**
-	 * G�n�re la signature des octets lus.
+	 * Génère la signature des octets lus.
 	 *
 	 * @param digest le hachage du message.
-	 * @param key    la cl� priv�e.
+	 * @param key    la clé privée.
 	 * @return la signature.
 	 */
 	@Override
@@ -50,10 +50,10 @@ public final class DSASignatureEngine extends SignatureEngine {
 	}
 
 	/**
-	 * V�rifie la signature des octets lus.
+	 * Vérifie la signature des octets lus.
 	 *
 	 * @param digest    le hachage du message.
-	 * @param key       la cl� publique.
+	 * @param key       la clé publique.
 	 * @param signature the signature.
 	 * @return true si la signature est valide, false sinon.
 	 */

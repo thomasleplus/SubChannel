@@ -5,31 +5,31 @@ import java.math.BigInteger;
 import org.leplus.libcrypto.PRNGenerator;
 
 /**
- * G�n�rateur de Nombres Pseudo-Al�atoires bias�.
+ * Générateur de Nombres Pseudo-Aléatoires biasé.
  */
 public final class BiasedPRNGenerator extends PRNGenerator {
 
 	private final BigInteger integer;
 
 	/**
-	 * Construit le g�n�rateur pseudo-al�atoire.
+	 * Construit le générateur pseudo-aléatoire.
 	 */
 	public BiasedPRNGenerator(final BigInteger i) {
 		integer = i;
 	}
 
 	/**
-	 * Retourne le grand entier fix�.
+	 * Retourne le grand entier fixé.
 	 *
-	 * @return le grand entier fix�.
+	 * @return le grand entier fixé.
 	 */
 	public BigInteger getBigInt() {
 		return integer;
 	}
 
 	/**
-	 * Retourne le grand entier fix� si sa valeur est comprise entre les valeurs
-	 * donn�es.
+	 * Retourne le grand entier fixé si sa valeur est comprise entre les valeurs
+	 * données.
 	 *
 	 * @param min la valeur minimum de l'entier.
 	 * @param max la valeur maximum de l'entier.
@@ -44,8 +44,8 @@ public final class BiasedPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne le grand entier fix� si sa taille est comprise entre les valeurs
-	 * donn�es.
+	 * Retourne le grand entier fixé si sa taille est comprise entre les valeurs
+	 * données.
 	 *
 	 * @param lmin le nombre minimum de bits de l'entier.
 	 * @param lmax le nombre maximum de bits de l'entier.

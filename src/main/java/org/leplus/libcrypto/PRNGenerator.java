@@ -3,12 +3,12 @@ package org.leplus.libcrypto;
 import java.math.BigInteger;
 
 /**
- * G�n�rateur de Nombres Pseudo-Al�atoires.
+ * Générateur de Nombres Pseudo-Aléatoires.
  */
 public abstract class PRNGenerator {
 
 	/**
-	 * Produit des nombres premiers impairs jusqu'� 101.
+	 * Produit des nombres premiers impairs jusqu'à 101.
 	 */
 	private static final BigInteger test = new BigInteger("116431182179248680450031658440253681535");
 
@@ -18,19 +18,19 @@ public abstract class PRNGenerator {
 	private static final BigInteger two = BigInteger.valueOf(2);
 
 	/**
-	 * Certitude de primalit� par d�faut. La certitude de primalit� est d�finie
-	 * comme suit : l'entier retourn� est premier avec une probabilit� p =
+	 * Certitude de primalité par défaut. La certitude de primalité est définie
+	 * comme suit : l'entier retourné est premier avec une probabilité p =
 	 * (1-1/2<sup>certainty</sup>).
 	 */
 	public static final int DEFAULT_CERTAINTY = 100;
 
 	/**
-	 * Retourne un entier pseudo-al�atoire dont la valeur est comprise entre les
-	 * valeurs donn�es.
+	 * Retourne un entier pseudo-aléatoire dont la valeur est comprise entre les
+	 * valeurs données.
 	 *
 	 * @param min la valeur minimum de l'entier.
 	 * @param max la valeur maximum de l'entier.
-	 * @return le grand entier pseudo-al�atoire.
+	 * @return le grand entier pseudo-aléatoire.
 	 */
 	public BigInteger getBigInt(final BigInteger min, final BigInteger max) {
 		final int t = min.compareTo(max);
@@ -48,12 +48,12 @@ public abstract class PRNGenerator {
 	}
 
 	/**
-	 * Retourne un entier pseudo-al�atoire dont la longueur en bits est comprise
-	 * entre les valeurs donn�es.
+	 * Retourne un entier pseudo-aléatoire dont la longueur en bits est comprise
+	 * entre les valeurs données.
 	 *
 	 * @param lmin le nombre minimum de bits de l'entier.
 	 * @param lmax le nombre maximum de bits de l'entier.
-	 * @return le grand entier pseudo-al�atoire.
+	 * @return le grand entier pseudo-aléatoire.
 	 */
 	public BigInteger getBigInt(final int lmin, final int lmax) {
 		if (lmin < 0 || lmin > lmax) {
@@ -69,31 +69,31 @@ public abstract class PRNGenerator {
 	}
 
 	/**
-	 * Retourne un grand nombre premier pseudo-al�atoire compris entre les valeurs
-	 * donn�es (avec une certitude de primalit� � 100).
+	 * Retourne un grand nombre premier pseudo-aléatoire compris entre les valeurs
+	 * données (avec une certitude de primalité à 100).
 	 *
 	 * @param min la valeur minimum du nombre premier.
 	 * @param max le valeur maximum du nombre premier.
-	 * @return le grand nombre premier pseudo-al�atoire ou null si aucun nombre
-	 *         premier n'est trouv� dans l'interval voulu (ce qui ne veut pas
-	 *         n�cessairement dire qu'il n'y en a pas).
+	 * @return le grand nombre premier pseudo-aléatoire ou null si aucun nombre
+	 *         premier n'est trouvé dans l'interval voulu (ce qui ne veut pas
+	 *         nécessairement dire qu'il n'y en a pas).
 	 */
 	public BigInteger getBigPrime(final BigInteger min, final BigInteger max) {
 		return getBigPrime(min, max, DEFAULT_CERTAINTY);
 	}
 
 	/**
-	 * Retourne un grand nombre premier pseudo-al�atoire compris entre les valeurs
-	 * donn�es.
+	 * Retourne un grand nombre premier pseudo-aléatoire compris entre les valeurs
+	 * données.
 	 *
 	 * @param min       la valeur minimum du nombre premier.
 	 * @param max       le valeur maximum du nombre premier.
-	 * @param certainty la certitude voulu sur la primalit� : l'entier retourn� est
-	 *                  premier avec une probabilit� p =
+	 * @param certainty la certitude voulu sur la primalité : l'entier retourné est
+	 *                  premier avec une probabilité p =
 	 *                  (1-1/2<sup>certainty</sup>).
-	 * @return le grand nombre premier pseudo-al�atoire ou null si aucun nombre
-	 *         premier n'est trouv� dans l'interval voulu (ce qui ne veut pas
-	 *         n�cessairement dire qu'il n'y en a pas).
+	 * @return le grand nombre premier pseudo-aléatoire ou null si aucun nombre
+	 *         premier n'est trouvé dans l'interval voulu (ce qui ne veut pas
+	 *         nécessairement dire qu'il n'y en a pas).
 	 */
 	public BigInteger getBigPrime(BigInteger min, final BigInteger max, final int certainty) {
 		if (min.signum() < 0 || min.compareTo(max) > 0) {
@@ -133,29 +133,29 @@ public abstract class PRNGenerator {
 	}
 
 	/**
-	 * Retourne un grand nombre premier pseudo-al�atoire de la longueur donn�e.
+	 * Retourne un grand nombre premier pseudo-aléatoire de la longueur donnée.
 	 *
 	 * @param lmin le nombre minimum de bits du nombre premier.
 	 * @param lmax le nombre maximum de bits du nombre premier.
-	 * @return le grand nombre premier pseudo-al�atoire ou null si aucun nombre
-	 *         premier n'est trouv� dans l'interval voulu (ce qui ne veut pas
-	 *         n�cessairement dire qu'il n'y en a pas).
+	 * @return le grand nombre premier pseudo-aléatoire ou null si aucun nombre
+	 *         premier n'est trouvé dans l'interval voulu (ce qui ne veut pas
+	 *         nécessairement dire qu'il n'y en a pas).
 	 */
 	public BigInteger getBigPrime(final int lmin, final int lmax) {
 		return getBigPrime(lmin, lmax, DEFAULT_CERTAINTY);
 	}
 
 	/**
-	 * Retourne un grand nombre premier pseudo-al�atoire de la longueur donn�e.
+	 * Retourne un grand nombre premier pseudo-aléatoire de la longueur donnée.
 	 *
 	 * @param lmin      le nombre minimum de bits du nombre premier.
 	 * @param lmax      le nombre maximum de bits du nombre premier.
-	 * @param certainty la certitude voulu sur la primalit� : l'entier retourn� est
-	 *                  premier avec une probabilit� p =
+	 * @param certainty la certitude voulu sur la primalité : l'entier retourné est
+	 *                  premier avec une probabilité p =
 	 *                  (1-1/2<sup>certainty</sup>).
-	 * @return le grand nombre premier pseudo-al�atoire ou null si aucun nombre
-	 *         premier n'est trouv� dans l'interval voulu (ce qui ne veut pas
-	 *         n�cessairement dire qu'il n'y en a pas).
+	 * @return le grand nombre premier pseudo-aléatoire ou null si aucun nombre
+	 *         premier n'est trouvé dans l'interval voulu (ce qui ne veut pas
+	 *         nécessairement dire qu'il n'y en a pas).
 	 */
 	public BigInteger getBigPrime(final int lmin, final int lmax, final int certainty) {
 		if (lmin < 0 || lmin > lmax) {
@@ -171,9 +171,9 @@ public abstract class PRNGenerator {
 	}
 
 	/**
-	 * Retourne un bit pseudo-al�atoire.
+	 * Retourne un bit pseudo-aléatoire.
 	 *
-	 * @return le bit pseudo-al�atoire.
+	 * @return le bit pseudo-aléatoire.
 	 */
 	public boolean getBit() {
 		final byte b = getByte();
@@ -182,14 +182,14 @@ public abstract class PRNGenerator {
 	}
 
 	/**
-	 * Retourne un octet pseudo-al�atoire.
+	 * Retourne un octet pseudo-aléatoire.
 	 *
-	 * @return l'octet pseudo-al�atoire.
+	 * @return l'octet pseudo-aléatoire.
 	 */
 	public abstract byte getByte();
 
 	/**
-	 * Retourne un tableau d'octets al�atoires de la longueur al�atoire.
+	 * Retourne un tableau d'octets aléatoires de la longueur aléatoire.
 	 *
 	 * @param length la longueur voulue.
 	 * @return le tableau d'octets.
@@ -203,70 +203,70 @@ public abstract class PRNGenerator {
 	}
 
 	/**
-	 * Retourne un nombre r�el double pr�cision pseudo-al�atoire compris entre 0 et
+	 * Retourne un nombre réel double précision pseudo-aléatoire compris entre 0 et
 	 * 1.
 	 *
-	 * @return le r�el double pr�cision pseudo-al�atoire.
+	 * @return le réel double précision pseudo-aléatoire.
 	 */
 	public double getDouble() {
 		return (((long) (getInt() & 0x03FFFFFF) << 27) + (getInt() & 0x07FFFFFF)) / (double) (1L << 53);
 	}
 
 	/**
-	 * Retourne un nombre r�el pseudo-al�atoire compris entre 0 et 1.
+	 * Retourne un nombre réel pseudo-aléatoire compris entre 0 et 1.
 	 *
-	 * @return le r�el pseudo-al�atoire.
+	 * @return le réel pseudo-aléatoire.
 	 */
 	public float getFloat() {
 		return (getInt() & 0x00FFFFFF) / (float) (1 << 24);
 	}
 
 	/**
-	 * Retourne un entier pseudo-al�atoire.
+	 * Retourne un entier pseudo-aléatoire.
 	 *
-	 * @return l'entier pseudo-al�atoire.
+	 * @return l'entier pseudo-aléatoire.
 	 */
 	public int getInt() {
 		return (getShort() << 16) + getShort();
 	}
 
 	/**
-	 * Retourne un entier pseudo-al�atoire dont la valeur est comprise entre les
-	 * valeurs donn�es.
+	 * Retourne un entier pseudo-aléatoire dont la valeur est comprise entre les
+	 * valeurs données.
 	 *
 	 * @param min la valeur minimum de l'entier.
 	 * @param max la valeur maximum de l'entier.
-	 * @return l'entier pseudo-al�atoire.
+	 * @return l'entier pseudo-aléatoire.
 	 */
 	public int getInt(final int min, final int max) {
 		return getBigInt(BigInteger.valueOf(min), BigInteger.valueOf(max)).intValue();
 	}
 
 	/**
-	 * Retourne un entier long pseudo-al�atoire.
+	 * Retourne un entier long pseudo-aléatoire.
 	 *
-	 * @return l'entier long pseudo-al�atoire.
+	 * @return l'entier long pseudo-aléatoire.
 	 */
 	public long getLong() {
 		return ((long) getInt() << 32) + getInt();
 	}
 
 	/**
-	 * Retourne un entier long pseudo-al�atoire dont la valeur est comprise entre
-	 * les valeurs donn�es.
+	 * Retourne un entier long pseudo-aléatoire dont la valeur est comprise entre
+	 * les valeurs données.
 	 *
 	 * @param min la valeur minimum de l'entier long.
 	 * @param max la valeur maximum de l'entier long.
-	 * @return l'entier long pseudo-al�atoire.
+	 * @return l'entier long pseudo-aléatoire.
 	 */
 	public long getLong(final long min, final long max) {
         return getBigInt(BigInteger.valueOf(min), BigInteger.valueOf(max)).longValue();
 	}
 
 	/**
-	 * Retourne un entier court pseudo-al�atoire.
+	 * Retourne un entier court pseudo-aléatoire.
 	 *
-	 * @return l'entier court pseudo-al�atoire.
+	 * @return l'entier court pseudo-aléatoire.
 	 */
 	public short getShort() {
 		return (short) ((getByte() << 8) + (getByte() & 0xff));

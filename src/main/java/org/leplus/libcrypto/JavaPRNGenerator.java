@@ -4,26 +4,26 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 /**
- * G�n�rateur de Nombres Pseudo-Al�atoires fournit par SUN Microsystem.
+ * Générateur de Nombres Pseudo-Aléatoires fournit par SUN Microsystem.
  */
 public final class JavaPRNGenerator extends PRNGenerator {
 
 	/**
-	 * Le g�n�rateur pseudo-al�atoire.
+	 * Le générateur pseudo-aléatoire.
 	 */
 	private final Random random;
 
 	/**
-	 * Construit le g�n�rateur pseudo-al�atoire.
+	 * Construit le générateur pseudo-aléatoire.
 	 */
 	public JavaPRNGenerator() {
 		random = new SecureRandom();
 	}
 
 	/**
-	 * Retourne un bit pseudo-al�atoire.
+	 * Retourne un bit pseudo-aléatoire.
 	 *
-	 * @return le bit pseudo-al�atoire.
+	 * @return le bit pseudo-aléatoire.
 	 */
 	@Override
 	public boolean getBit() {
@@ -31,9 +31,9 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne un entier court pseudo-al�atoire.
+	 * Retourne un entier court pseudo-aléatoire.
 	 *
-	 * @return l'entier court pseudo-al�atoire.
+	 * @return l'entier court pseudo-aléatoire.
 	 */
 	@Override
 	public byte getByte() {
@@ -43,7 +43,7 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne un tableau d'octets al�atoires de la longueur al�atoire.
+	 * Retourne un tableau d'octets aléatoires de la longueur aléatoire.
 	 *
 	 * @param length la longueur voulue.
 	 * @return le tableau d'octets.
@@ -56,10 +56,10 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne un nombre r�el double pr�cision pseudo-al�atoire compris entre 0 et
+	 * Retourne un nombre réel double précision pseudo-aléatoire compris entre 0 et
 	 * 1.
 	 *
-	 * @return le r�el double pr�cision pseudo-al�atoire.
+	 * @return le réel double précision pseudo-aléatoire.
 	 */
 	@Override
 	public double getDouble() {
@@ -67,9 +67,9 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne un nombre r�el pseudo-al�atoire compris entre 0 et 1.
+	 * Retourne un nombre réel pseudo-aléatoire compris entre 0 et 1.
 	 *
-	 * @return le r�el pseudo-al�atoire.
+	 * @return le réel pseudo-aléatoire.
 	 */
 	@Override
 	public float getFloat() {
@@ -77,9 +77,9 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne un entier pseudo-al�atoire.
+	 * Retourne un entier pseudo-aléatoire.
 	 *
-	 * @return l'entier pseudo-al�atoire.
+	 * @return l'entier pseudo-aléatoire.
 	 */
 	@Override
 	public int getInt() {
@@ -87,9 +87,9 @@ public final class JavaPRNGenerator extends PRNGenerator {
 	}
 
 	/**
-	 * Retourne un entier long pseudo-al�atoire.
+	 * Retourne un entier long pseudo-aléatoire.
 	 *
-	 * @return l'entier long pseudo-al�atoire.
+	 * @return l'entier long pseudo-aléatoire.
 	 */
 	@Override
 	public long getLong() {

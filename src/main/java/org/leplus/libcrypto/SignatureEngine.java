@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Machine � Signatures.
+ * Machine à Signatures.
  */
 public abstract class SignatureEngine {
 
@@ -14,38 +14,38 @@ public abstract class SignatureEngine {
 	protected DigestEngine digest;
 
 	/**
-	 * G�n�re la signature des octets lus.
+	 * Génère la signature des octets lus.
 	 *
 	 * @param digest le hachage du message.
-	 * @param key    la cl� priv�e.
+	 * @param key    la clé privée.
 	 * @return la signature.
 	 */
 	protected abstract Signature doSign(Digest digest, PrivateKey key);
 
 	/**
-	 * V�rifie la signature des octets lus.
+	 * Vérifie la signature des octets lus.
 	 *
 	 * @param digest    le hachage du message.
-	 * @param key       la cl� publique.
+	 * @param key       la clé publique.
 	 * @param signature the signature.
 	 * @return true si la signature est valide, false sinon.
 	 */
 	protected abstract boolean doVerify(Digest digest, PublicKey key, Signature signature);
 
 	/**
-	 * Remet la machine dans son �tat initial (garde en m�moire le mode g�n�ration
-	 * ou v�rification et la cl� correspondante).
+	 * Remet la machine dans son état initial (garde en mémoire le mode génération
+	 * ou vérification et la clé correspondante).
 	 */
 	public final void reset() {
 		digest.reset();
 	}
 
 	/**
-	 * G�n�re la signature des octets lus et remet la machine dans son �tat initial
-	 * (garde en m�moire le mode g�n�ration ou v�rification et la cl�
+	 * Génère la signature des octets lus et remet la machine dans son état initial
+	 * (garde en mémoire le mode génération ou vérification et la clé
 	 * correspondante).
 	 *
-	 * @param key la cl� priv�e.
+	 * @param key la clé privée.
 	 * @return la signature.
 	 */
 	public final Signature sign(final PrivateKey key) {
@@ -63,12 +63,12 @@ public abstract class SignatureEngine {
 	}
 
 	/**
-	 * Lit au plus le nombre donn� d'octets du tableau en commen�ant � l'indice
-	 * donn�.
+	 * Lit au plus le nombre donné d'octets du tableau en commençant à l'indice
+	 * donné.
 	 *
 	 * @param bytes  le tableau d'octets.
-	 * @param offset l'indice de d�part.
-	 * @param length le nombre d'octets � lire.
+	 * @param offset l'indice de départ.
+	 * @param length le nombre d'octets à lire.
 	 * @return le nombre d'octets lus.
 	 */
 	public final int update(final byte[] bytes, final int offset, final int length) {
@@ -76,9 +76,9 @@ public abstract class SignatureEngine {
 	}
 
 	/**
-	 * Lit les octets sur le flot jusqu'� sa fin.
+	 * Lit les octets sur le flot jusqu'à sa fin.
 	 *
-	 * @param input le flot d'entr�e.
+	 * @param input le flot d'entrée.
 	 * @return le nombre d'octets lus.
 	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
@@ -87,10 +87,10 @@ public abstract class SignatureEngine {
 	}
 
 	/**
-	 * Lit au plus le nombre donn� d'octets sur le flot.
+	 * Lit au plus le nombre donné d'octets sur le flot.
 	 *
-	 * @param input  le flot d'entr�e.
-	 * @param length le nombre d'octets � lire.
+	 * @param input  le flot d'entrée.
+	 * @param length le nombre d'octets à lire.
 	 * @return le nombre d'octets lus.
 	 * @throws IOException si une erreure se produit lors de la lecture du flot.
 	 */
@@ -99,11 +99,11 @@ public abstract class SignatureEngine {
 	}
 
 	/**
-	 * V�rifie la signature des octets lus et remet la machine dans son �tat initial
-	 * (garde en m�moire le mode g�n�ration ou v�rification et la cl�
+	 * Vérifie la signature des octets lus et remet la machine dans son état initial
+	 * (garde en mémoire le mode génération ou vérification et la clé
 	 * correspondante).
 	 *
-	 * @param key       la cl� publique.
+	 * @param key       la clé publique.
 	 * @param signature the signature.
 	 * @return true si la signature est valide, false sinon.
 	 */

@@ -1,7 +1,7 @@
 package org.leplus.libcrypto;
 
 /**
- * Cl� Publique.
+ * Clé Publique.
  */
 public abstract class PublicKey extends Key {
 
