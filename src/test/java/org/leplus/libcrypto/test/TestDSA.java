@@ -5,33 +5,39 @@ import org.leplus.libcrypto.*;
 import java.math.BigInteger;
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
 public final class TestDSA
 {
-	public static DSAKeyPairGenerator generator;
+	private DSAKeyPairGenerator generator;
 	
-	public static DSASignatureEngine engine;
+	private DSASignatureEngine engine;
 	
-	public static DSAKeyPair pair;
+	private DSAKeyPair pair;
 	
-	public static void main(String[] args)
+	@Test
+	public void test()
 		throws Exception {
-		PRNGenerator random = new JavaPRNGenerator();
+		final PRNGenerator random = new JavaPRNGenerator();
 		generator = new DSAKeyPairGenerator(random);
 		engine = new DSASignatureEngine(random);
-		Date start = new java.util.Date();
+		final Date start = new java.util.Date();
 		pair = (DSAKeyPair)generator.generateKeyPair();
-		Date stop = new java.util.Date();
+		final Date stop = new java.util.Date();
 		System.out.println("Generation Time : " + ((double)(stop.getTime() - start.getTime()) / 1000) + " secondes");
-		testPair(1000);
-		test("", 0);
-		test("", 1);
-		test("abc", 1);
-		test("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", 1);
-		test("a", 1000000);
+		boolean b = true;
+		b = testPair(1000) ? b : false;
+		b = test("", 0) ? b : false;
+		b = test("", 1) ? b : false;
+		b = test("abc", 1) ? b : false;
+		b = test("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", 1) ? b : false;
+		b = test("a", 1000000) ? b : false;
 		/* DSA Test Vectors */
+		assertTrue(b);
 	}
 	
-	public static boolean testPair(int certainty)
+	private boolean testPair(int certainty)
 		throws Exception {
 		System.out.print("   p = " + pair.getP().toString(16) + " is prime : ");
 		if (pair.getP().isProbablePrime(certainty))
@@ -54,7 +60,7 @@ public final class TestDSA
 		return true;
 	}
 	
-	public static boolean test(String vector, int loop)
+	private boolean test(String vector, int loop)
 		throws Exception {
 		for (int i = 0; i < loop; i++)
 			engine.update(vector.getBytes());

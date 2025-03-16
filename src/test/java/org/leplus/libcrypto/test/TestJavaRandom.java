@@ -5,22 +5,28 @@ import org.leplus.libcrypto.*;
 import java.math.BigInteger;
 import java.math.BigDecimal;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
 public final class TestJavaRandom
 {
-	public static final JavaPRNGenerator random = new JavaPRNGenerator();
+	private final JavaPRNGenerator random = new JavaPRNGenerator();
 	
-    public static void main(String[] args)
+    @Test
+    public void test()
 		throws Exception {
-  		testBits(1000000);
-  		testBytes(1000000);
-		testShorts(10000000);
-  		testInts(1000000);
-  		testLongs(1000000);
-  		testFloats(1000000);
-  		testDoubles(1000000);
+		boolean b = true;
+  		b = testBits(1000000) ? b : false;
+  		b = testBytes(1000000) ? b : false;
+		b = testShorts(10000000) ? b : false;
+  		b = testInts(1000000) ? b : false;
+  		b = testLongs(1000000) ? b : false;
+  		b = testFloats(1000000) ? b : false;
+  		b = testDoubles(1000000) ? b : false;
+		assertTrue(b);
     }
 
-    public static boolean testBits(int samples)
+    private boolean testBits(int samples)
 		throws Exception {
 		int t = 0;
 		for (int i = 0; i < samples; i++)
@@ -32,7 +38,7 @@ public final class TestJavaRandom
 		return true;
     }
 
-    public static boolean testBytes(int samples)
+    private boolean testBytes(int samples)
 		throws Exception {
 		int[] table = new int[Byte.MAX_VALUE - Byte.MIN_VALUE + 1];
 		for (int i = 0; i < samples; i++)
@@ -55,7 +61,7 @@ public final class TestJavaRandom
 		return true;
     }
 	
-    public static boolean testShorts(int samples)
+    private boolean testShorts(int samples)
 		throws Exception {
 		int[] table = new int[Short.MAX_VALUE - Short.MIN_VALUE + 1];
 		for (int i = 0; i < samples; i++)
@@ -78,7 +84,7 @@ public final class TestJavaRandom
 		return true;
     }
 	
-    public static boolean testInts(int samples)
+    private boolean testInts(int samples)
 		throws Exception {
 		double avg = 0;
 		for (int i = 0; i < samples; i++)
@@ -88,7 +94,7 @@ public final class TestJavaRandom
 		return true;
     }
 	
-    public static boolean testLongs(int samples)
+    private boolean testLongs(int samples)
 		throws Exception {
 		double avg = 0;
 		for (int i = 0; i < samples; i++)
@@ -98,7 +104,7 @@ public final class TestJavaRandom
 		return true;
     }
 	
-    public static boolean testFloats(int samples)
+    private boolean testFloats(int samples)
 		throws Exception {
 		double avg = 0;
 		for (int i = 0; i < samples; i++)
@@ -108,7 +114,7 @@ public final class TestJavaRandom
 		return true;
     }
 	
-    public static boolean testDoubles(int samples)
+    private boolean testDoubles(int samples)
 		throws Exception {
 		double avg = 0;
 		for (int i = 0; i < samples; i++)
