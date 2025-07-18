@@ -6,9 +6,9 @@ import java.security.InvalidParameterException;
 /**
  * Générateur de Pair de Clés Cryptographiques DSA.
  *
- * Le <i>Digital Signature Algorithm</i> est défini par la norme <a href=
- * "http://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">FIPS
- * 186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
+ * Le <i>Digital Signature Algorithm</i> est défini par la norme
+ * <a href="https://csrc.nist.gov/publications/fips/fips186-2/fips186-2-change1.pdf">
+ * FIPS186-2</a> (<i>Digital Signature Scheme</i>) du NIST.
  */
 public final class DSAKeyPairGenerator extends KeyPairGenerator {
 
