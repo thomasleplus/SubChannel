@@ -21,7 +21,6 @@ public final class Main {
     @Override
     public void actionPerformed(final ActionEvent ae) {
       try {
-        getClass();
         Class.forName(windowClass).getDeclaredConstructor().newInstance();
       } catch (final Exception ex) {
         ex.printStackTrace();
