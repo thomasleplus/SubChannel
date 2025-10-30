@@ -1,7 +1,6 @@
 # SubChannel
 
 [![Maven](https://github.com/thomasleplus/SubChannel/workflows/Maven/badge.svg)](https://github.com/thomasleplus/SubChannel/actions?query=workflow:"Maven")
-[![CodeQL](https://github.com/thomasleplus/SubChannel/workflows/CodeQL/badge.svg)](https://github.com/thomasleplus/SubChannel/actions?query=workflow:"CodeQL")
 
 > [!WARNING]
 > THIS CODE IS EXPERIMENTAL AND WAS WRITTEN AS PART OF A RESEARCH
