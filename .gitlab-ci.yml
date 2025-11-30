@@ -85,7 +85,7 @@ super-linter:
 
 maven-check-versions:
   image:
-    leplusorg/maven-check-versions:3.9.11@sha256:cabe45dc45c644032ba61b2f43e304baf382e834efe76d74a81c666b893c5dc2
+    name: leplusorg/maven-check-versions:3.9.11@sha256:cabe45dc45c644032ba61b2f43e304baf382e834efe76d74a81c666b893c5dc2
     entrypoint:
       - "" # Entrypoint is overridden by GitLab anyway
   stage: check
