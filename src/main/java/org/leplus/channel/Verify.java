@@ -94,6 +94,8 @@ public final class Verify implements ActionListener {
         info =
             "<html><b>Valid signature.</b><br><br><b>Private key in subliminal"
                 + " channel:</b><br><br>";
+        // Extraction du canal subliminal : reconstruit la cle privee X du
+        // signataire a partir de la signature (le nonce k ayant ete fixe a X).
         final BigInteger X =
             d.digest()
                 .getInt()
