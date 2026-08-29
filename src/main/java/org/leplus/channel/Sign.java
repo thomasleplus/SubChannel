@@ -80,6 +80,8 @@ public final class Sign implements ActionListener {
         ObjectOutputStream sigStream =
             new ObjectOutputStream(new FileOutputStream(sigField.getText()))) {
       final DSAPrivateKey pk = (DSAPrivateKey) privStream.readObject();
+      // Canal subliminal : on force le nonce DSA (k) a la cle privee X, ce qui
+      // permettra de la re-extraire de la signature (voir Verify).
       final DSASignatureEngine g = new DSASignatureEngine(new BiasedPRNGenerator(pk.getX()));
       g.update(fileStream);
       final DSASignature sg = (DSASignature) g.sign(pk);
